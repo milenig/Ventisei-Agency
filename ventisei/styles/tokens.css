@@ -1,0 +1,46 @@
+:root {
+  --bg: #f3f1ec;
+  --bg-dark: #0d0d0d;
+  --ink: #111111;
+  --ink-light: #555555;
+  --ink-muted: #999999;
+  --cyan: #00b3b3;
+  --cyan-dim: rgba(0, 179, 179, 0.15);
+  --white: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-cyan: rgba(0, 179, 179, 0.4);
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-body: 'Barlow', sans-serif;
+
+  --ease-arch: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-heavy: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --gutter: clamp(20px, 4vw, 72px);
+  --section-y: clamp(120px, 14vw, 220px);
+  --section-y-lg: clamp(160px, 18vw, 280px);
+  --grid-gap: 4px;
+  --radius-0: 0px;
+  --nav-h: 72px;
+  --rail-x: 22px;
+  --rail-y: 120px;
+  --container: 1200px;
+  --containerWide: 1400px;
+  --measure: 66ch;
+  --measureNarrow: 54ch;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --rail-x: 14px;
+    --rail-y: 104px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rail-x: 10px;
+    --rail-y: 92px;
+  }
+}

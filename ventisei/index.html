@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!-- Otvori folder u Cursor/VS Code → desni klik index.html → Open with Live Server. -->
+<html lang="sr-Latn">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventisei &amp; Brands — Kreativna agencija</title>
+    <meta name="description" content="Ventisei & Brands: brending, strategija, dizajn, digital i događaji. Izgradnja jasnog izraza i doslednog prisustva na tržištu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/tokens.css?v=2026-04-15-05">
+    <link rel="stylesheet" href="./styles/base.css?v=2026-04-15-05">
+    <link rel="stylesheet" href="./styles/sections.css?v=2026-04-15-05">
+  </head>
+
+  <body>
+    <aside class="index-rail" aria-hidden="true">
+      <a class="index-link is-active" href="#hero" data-section="hero"><span class="index-num">01</span> <span class="index-label">POČETAK</span></a>
+      <a class="index-link" href="#about" data-section="about"><span class="index-num">02</span> <span class="index-label">O NAMA</span></a>
+      <a class="index-link" href="#works" data-section="works"><span class="index-num">03</span> <span class="index-label">PORTFOLIO</span></a>
+      <a class="index-link" href="#method" data-section="method"><span class="index-num">04</span> <span class="index-label">PRISTUP</span></a>
+      <a class="index-link" href="#services" data-section="services"><span class="index-num">05</span> <span class="index-label">USLUGE</span></a>
+      <a class="index-link" href="#testimonials" data-section="testimonials"><span class="index-num">06</span> <span class="index-label">UTISCI</span></a>
+      <a class="index-link" href="#blog" data-section="blog"><span class="index-num">07</span> <span class="index-label">BLOG</span></a>
+      <a class="index-link" href="#contact" data-section="contact"><span class="index-num">08</span> <span class="index-label">KONTAKT</span></a>
+    </aside>
+
+    <nav id="main-nav" class="nav">
+      <div class="container nav-inner">
+        <a class="nav-brand" href="#hero">VENTISEI &amp; BRANDS</a>
+        <a href="#contact" class="nav-cta">POŠALJI UPIT</a>
+      </div>
+    </nav>
+
+    <section id="hero" class="section section-hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-inner container--wide">
+        <div class="hero-established">OSNOVANO · MMXXVI · BEOGRAD</div>
+
+        <div class="hero-stack">
+          <h1 class="hero-title" aria-label="Ventisei and Brands">
+            <span class="hero-title-line"><span>VENTISEI</span></span>
+            <span class="hero-title-line"><span>&amp; BRANDS</span></span>
+          </h1>
+
+          <div class="hero-copy">
+            <div class="hero-copy-text">
+              <p class="hero-kicker measure--narrow">Precizan brending. Savremena realizacija.</p>
+              <p class="hero-desc measure--narrow">
+                Strategija, dizajn i digital koji drže formu kroz kanale — od identiteta i komunikacije do sajta, kampanja i događaja.
+              </p>
+              <a class="hero-cta" href="#contact">POŠALJI UPIT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section-about">
+      <div class="container">
+        <header class="section-head">
+          <div class="section-kicker">02 // O_NAMA</div>
+          <h2 class="section-title reveal-up">KO SMO</h2>
+          <div class="section-meta micro-label">AGENCIJA · STRATEGIJA · KREACIJA</div>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-content">
+            <p class="about-lead reveal-up">
+              <strong>Ventisei &amp; Brands</strong> je kreativna agencija koja brendovima pomaže da pronađu svoj jasan izraz i pretvore ga u snažno, savremeno i relevantno prisustvo.
+            </p>
+            <div class="about-body measure reveal-up">
+              <p>
+                Naš fokus je na stvaranju promišljenih identiteta i komunikacionih rešenja koja nisu zasnovana samo na estetici, već na ideji, strategiji i doslednoj realizaciji.
+              </p>
+              <p>
+                Radimo na preseku brendinga, strategije, dizajna, sadržaja, oglašavanja, izrade veb sajtova i organizacije događaja, jer verujemo da se pravi utisak brenda gradi kroz pojedinačne elemente, ali i kroz celokupno iskustvo.
+              </p>
+              <p>
+                Svakom projektu pristupamo sa pažnjom, razumevanjem i ambicijom da razvijemo nešto što ima karakter, funkciju i dugoročnu vrednost.
+              </p>
+              <p class="about-closing">
+                Stvaramo brendove koji umeju da se istaknu, povežu i ostanu upamćeni.
+              </p>
+            </div>
+          </div>
+
+          <aside class="about-ascii" aria-hidden="true">
+            <canvas class="about-ascii-canvas"></canvas>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="section section-archive">
+      <div class="container--wide">
+        <header class="section-head">
+          <div class="section-kicker">03 // PORTFOLIO</div>
+          <h2 class="section-title reveal-up">IZABRANI RADOVI</h2>
+          <div class="section-meta micro-label">PREGLED PO KATEGORIJAMA</div>
+        </header>
+
+        <div class="archive-grid">
+          <article class="archive-tile archive-tile--a" data-category="brending">
+            <div class="archive-art archive-art--wire"></div>
+            <canvas class="archive-shader" data-id="0" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">GRADIJENT_I</div>
+              <div class="archive-sub">BREND SISTEM · EDITORIAL</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--b" data-category="strategija">
+            <div class="archive-art archive-art--object"></div>
+            <canvas class="archive-shader" data-id="1" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">PLATFORMA_X</div>
+              <div class="archive-sub">POZICIONIRANJE · LANAC</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--c" data-category="dizajn">
+            <div class="archive-art archive-art--portrait"></div>
+            <canvas class="archive-shader" data-id="2" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">SERIJA_VIZUEL</div>
+              <div class="archive-sub">SOCIAL · ŠTAMPA</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--d" data-category="video">
+            <div class="archive-art archive-art--noise"></div>
+            <canvas class="archive-shader" data-id="3" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">REEL_KUTIJA</div>
+              <div class="archive-sub">KRATKI FORMAT · MONTO</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--square" data-category="oglasavanje">
+            <div class="archive-art archive-art--wire"></div>
+            <canvas class="archive-shader" data-id="4" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">KAMPANJA_Q4</div>
+              <div class="archive-sub">META · GOOGLE · MERENJE</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--square" data-category="web">
+            <div class="archive-art archive-art--object"></div>
+            <canvas class="archive-shader" data-id="5" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">LANDING_SUTRA</div>
+              <div class="archive-sub">LANDING · PREZENTACIJA</div>
+            </div>
+          </article>
+
+          <article class="archive-tile archive-tile--wide" data-category="dogadaji">
+            <div class="archive-art archive-art--noise"></div>
+            <canvas class="archive-shader" data-id="6" aria-hidden="true"></canvas>
+            <div class="archive-caption">
+              <div class="archive-name">FEST_TOČAK</div>
+              <div class="archive-sub">KONCEPT · LOGISTIKA · KOMUNIKACIJA</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="section section-method">
+      <div class="container--wide">
+        <header class="section-head">
+          <div class="section-kicker">04 // NAČIN_RADA</div>
+          <h2 class="section-title reveal-up">NAČIN RADA</h2>
+          <div class="section-meta micro-label">TRI KORAKA · JEDAN TOK</div>
+        </header>
+
+        <div class="methodScroll">
+          <div class="methodScroll-spacer" aria-hidden="true"></div>
+
+          <div class="methodScroll-panel" aria-hidden="false">
+            <div class="methodScroll-left">
+              <h3 class="methodScroll-title">Kako radimo</h3>
+              <p class="methodScroll-desc">Tri koraka, jedan tok: od konteksta i ciljeva, preko sistema, do isporuke koja ostaje stabilna.</p>
+
+              <div class="methodScroll-tabs" role="tablist" aria-label="Koraci procesa">
+                <button class="methodScroll-tab is-active" type="button" role="tab" aria-selected="true" aria-expanded="true" data-step="1">
+                  <div class="methodScroll-tabTop">
+                    <span class="methodScroll-tabNum">01</span>
+                    <span class="methodScroll-tabName">SASLUŠAVANJE</span>
+                  </div>
+                  <div class="methodScroll-tabBody">
+                    Čujemo kontekst, publiku i ograničenja: šta brend već nosi, šta treba da sazri i gde leži prostor za skok.
+                  </div>
+                </button>
+
+                <button class="methodScroll-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-step="2">
+                  <div class="methodScroll-tabTop">
+                    <span class="methodScroll-tabNum">02</span>
+                    <span class="methodScroll-tabName">SISTEM</span>
+                  </div>
+                  <div class="methodScroll-tabBody">
+                    Prevodimo ustanovljene ciljeve u jeziku: tipografija, mreža, kanali, ton i jasna pravila — da sve „priča“ u istom glasu.
+                  </div>
+                </button>
+
+                <button class="methodScroll-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-step="3">
+                  <div class="methodScroll-tabTop">
+                    <span class="methodScroll-tabNum">03</span>
+                    <span class="methodScroll-tabName">ISPORUKA</span>
+                  </div>
+                  <div class="methodScroll-tabBody">
+                    Objavljujemo brzo i uredno: fajlovi, rokovi, kampanje i podrška nakon lansiranja — da iskustvo ostane stabilno i merljivo.
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="methodScroll-right" aria-hidden="true">
+              <div class="methodScroll-visual">
+                <div class="methodScroll-visualItem is-active" data-step="1">
+                  <div class="blueprint" data-coord="OS_01">
+                    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="0" y1="60" x2="280" y2="60" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <line x1="0" y1="120" x2="280" y2="120" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <line x1="93" y1="0" x2="93" y2="180" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <line x1="186" y1="0" x2="186" y2="180" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <rect class="draw-line" x="20" y="20" width="240" height="140" stroke="rgba(0,0,0,0.20)" stroke-width="0.8" fill="none" />
+                      <line class="draw-line" x1="20" y1="20" x2="260" y2="160" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                      <line class="draw-line" x1="260" y1="20" x2="20" y2="160" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" />
+                      <circle class="draw-line" cx="140" cy="90" r="36" stroke="var(--cyan)" stroke-width="1.5" fill="none" />
+                      <line class="draw-line" x1="0" y1="90" x2="280" y2="90" stroke="var(--cyan)" stroke-width="1" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="methodScroll-visualItem" data-step="2">
+                  <div class="blueprint" data-coord="OS_02">
+                    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="0" y1="60" x2="280" y2="60" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <line x1="0" y1="120" x2="280" y2="120" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4 4" />
+                      <rect x="20" y="20" width="240" height="140" stroke="rgba(0,0,0,0.12)" stroke-width="0.5" stroke-dasharray="6 4" fill="none" />
+                      <polygon class="draw-line" points="140,22 258,90 140,158 22,90" stroke="var(--cyan)" stroke-width="1.5" fill="none" />
+                      <line class="draw-line" x1="0" y1="90" x2="280" y2="90" stroke="var(--cyan)" stroke-width="1" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="methodScroll-visualItem" data-step="3">
+                  <div class="blueprint" data-coord="OS_03">
+                    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="draw-line" cx="140" cy="90" r="64" stroke="rgba(0,0,0,0.15)" stroke-width="0.8" fill="none" />
+                      <rect class="draw-line" x="104" y="58" width="58" height="58" stroke="var(--cyan)" stroke-width="1.5" fill="rgba(0,179,179,0.10)" />
+                      <line class="draw-line" x1="0" y1="90" x2="280" y2="90" stroke="rgba(0,179,179,0.30)" stroke-width="0.8" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section section-services">
+      <div class="container">
+        <header class="services-head">
+          <div class="services-kicker">05 // USLUGE</div>
+          <h2 class="services-title reveal-up">ŠTA RADIMO</h2>
+        </header>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-num">01.</div>
+            <h3 class="service-name">BRENDING</h3>
+            <p class="service-desc">Identitet koji se prepoznaje i ponavlja kroz dodire — vizuelno i verbalno, dosledno kroz kanale.</p>
+            <div class="service-tags" aria-label="Brending tagovi">
+              <span class="tag">verbalni_identitet</span>
+              <span class="tag">vizuelni_sistem</span>
+              <span class="tag">ton_glasa</span>
+              <span class="tag">brand_guidelines</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">02.</div>
+            <h3 class="service-name">STRATEGIJA</h3>
+            <p class="service-desc">Jasna pozicija, publika i poruke koje drže kampanje — da komunikacija ima oslonac i smer.</p>
+            <div class="service-tags" aria-label="Strategija tagovi">
+              <span class="tag">pozicioniranje</span>
+              <span class="tag">platforma_brenda</span>
+              <span class="tag">arhitektura_ponude</span>
+              <span class="tag">poruke</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">03.</div>
+            <h3 class="service-name">DIZAJN</h3>
+            <p class="service-desc">Sistem vizuela koji radi u praksi — od društvenih mreža do štampe, sa jasnom hijerarhijom.</p>
+            <div class="service-tags" aria-label="Dizajn tagovi">
+              <span class="tag">social_design</span>
+              <span class="tag">editorial</span>
+              <span class="tag">print</span>
+              <span class="tag">grid_sistem</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">04.</div>
+            <h3 class="service-name">VIDEO_I_FOTO</h3>
+            <p class="service-desc">Snimanje i postprodukcija za kampanje i kratke formate — materijal koji izgleda uredno i moderno.</p>
+            <div class="service-tags" aria-label="Video i foto tagovi">
+              <span class="tag">reels</span>
+              <span class="tag">snimanje</span>
+              <span class="tag">montaza</span>
+              <span class="tag">obrada</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">05.</div>
+            <h3 class="service-name">OGLAŠAVANJE</h3>
+            <p class="service-desc">Kreativa + optimizacija za rezultate — jasni setovi oglasa, iteracije i merenje koje ima smisla.</p>
+            <div class="service-tags" aria-label="Oglašavanje tagovi">
+              <span class="tag">meta_ads</span>
+              <span class="tag">google_ads</span>
+              <span class="tag">landing_copy</span>
+              <span class="tag">analitika</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">06.</div>
+            <h3 class="service-name">WEB</h3>
+            <p class="service-desc">Prezentacioni sajtovi i landing stranice — struktura, brzina i jasnoća u prvih pet sekundi.</p>
+            <div class="service-tags" aria-label="Web tagovi">
+              <span class="tag">prezentacija</span>
+              <span class="tag">landing</span>
+              <span class="tag">ui_ux</span>
+              <span class="tag">seo_osnove</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-num">07.</div>
+            <h3 class="service-name">DOGAĐAJI</h3>
+            <p class="service-desc">Koncept, logistika i komunikacija — događaj kao deo brend priče, ne izolovan trenutak.</p>
+            <div class="service-tags" aria-label="Događaji tagovi">
+              <span class="tag">koncept</span>
+              <span class="tag">produkcija</span>
+              <span class="tag">komunikacija</span>
+              <span class="tag">live_iskustvo</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section section-testimonials">
+      <div class="container">
+        <header class="section-head">
+          <div class="section-kicker">06 // UTISCI</div>
+          <h2 class="section-title reveal-up">PREPORUKE</h2>
+          <div class="section-meta micro-label">IZABRANE REFERENZE</div>
+        </header>
+
+        <div class="testimonials-grid">
+          <figure class="testimonial reveal-up">
+            <blockquote>„Konačno imamo brend koji se čuje isto u svakom dodirivanju — od sajta do reklame.”</blockquote>
+            <figcaption><span class="t-name">Direktorka marketinga</span><span class="t-role">— retail brend</span></figcaption>
+          </figure>
+          <figure class="testimonial reveal-up">
+            <blockquote>„Razumeli su nas brzo, a isporuka je bila jasna, bez haosa među rokovima.”</blockquote>
+            <figcaption><span class="t-name">Osnivač</span><span class="t-role">— tech startap</span></figcaption>
+          </figure>
+          <figure class="testimonial reveal-up">
+            <blockquote>„Nisu samo „ulepšali” — složili su sistem koji tim stvarno koristi.”</blockquote>
+            <figcaption><span class="t-name">Menadžer proizvoda</span><span class="t-role">— B2B kompanija</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="section section-blog">
+      <div class="container">
+        <header class="section-head">
+          <div class="section-kicker">07 // BLOG</div>
+          <h2 class="section-title reveal-up">BELEŠKE IZ STUDIOA</h2>
+          <div class="section-meta micro-label">TEKSTOVI · PROCES · KULTURA</div>
+        </header>
+
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-ascii-wrap" aria-hidden="true">
+              <canvas class="blog-ascii-canvas"></canvas>
+            </div>
+            <div class="blog-card-body">
+              <time class="blog-date" datetime="2026-03-12">12. mart 2026.</time>
+              <h3 class="blog-title"><a href="#">Zašto ton glasa brenda nije „dodatak”, već temelj</a></h3>
+              <p class="blog-excerpt">Kratak vodič kako uskladiti verbalni identitet sa vizuelom kada uđete u nove kanale i tržišta.</p>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-ascii-wrap" aria-hidden="true">
+              <canvas class="blog-ascii-canvas"></canvas>
+            </div>
+            <div class="blog-card-body">
+              <time class="blog-date" datetime="2026-03-28">28. mart 2026.</time>
+              <h3 class="blog-title"><a href="#">Landing stranica: šta korisnik mora da razume u prvih pet sekundi</a></h3>
+              <p class="blog-excerpt">Praktične napomene o hijerarhiji, dokazu društvenog poverenja i jasnoj akciji.</p>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-ascii-wrap" aria-hidden="true">
+              <canvas class="blog-ascii-canvas"></canvas>
+            </div>
+            <div class="blog-card-body">
+              <time class="blog-date" datetime="2026-04-02">2. april 2026.</time>
+              <h3 class="blog-title"><a href="#">Događaj kao modul u brend priči</a></h3>
+              <p class="blog-excerpt">Kako koncept, raspored i komunikacija pre i posle live iskustva grade isti narativ.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-contactForm">
+      <div class="container">
+        <header class="section-head">
+          <div class="section-kicker">08 // KONTAKT</div>
+          <h2 class="section-title reveal-up">STVARAMO ZAJEDNO</h2>
+          <div class="section-meta micro-label">ODGOVOR U ROKU OD 48H</div>
+        </header>
+
+        <div class="contactForm-grid">
+          <div class="contactForm-copy">
+            <div class="micro-label micro-label--cyan">UPIT ZA SARADNJU</div>
+            <p class="contactForm-body measure">
+              Napišite nam šta gradite i šta mora da važi kada projekat bude gotov. Javićemo sledeće korake i okvir ponude.
+            </p>
+          </div>
+
+          <form class="contactForm" action="#" method="post">
+            <label class="field">
+              <span class="field-label micro-label">IME I PREZIME</span>
+              <input class="field-input" name="name" autocomplete="name" required>
+            </label>
+            <label class="field">
+              <span class="field-label micro-label">E-POŠTA</span>
+              <input class="field-input" type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="field">
+              <span class="field-label micro-label">KOMPANIJA / BREND</span>
+              <input class="field-input" name="company" autocomplete="organization">
+            </label>
+            <label class="field field--full">
+              <span class="field-label micro-label">PORUKA</span>
+              <textarea class="field-input field-textarea" name="message" rows="5" required></textarea>
+            </label>
+
+            <button class="form-cta" type="submit">POŠALJI UPIT</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">VENTISEI &amp; BRANDS</div>
+          <p class="footer-tag">PRECIZAN BREND · SAVREMENA REALIZACIJA</p>
+        </div>
+        <nav class="footer-nav" aria-label="Podnožje">
+          <a href="#about">O nama</a>
+          <a href="#works">Portfolio</a>
+          <a href="#services">Usluge</a>
+          <a href="#blog">Blog</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+        <div class="footer-meta">
+          <span>© MMXXVI · Ventisei &amp; Brands · Sva prava zadržana</span>
+          <a href="mailto:hello@ventisei.arch">hello@ventisei.arch</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+    <script type="module" src="./scripts/main.js?v=2026-04-15-05"></script>
+  </body>
+</html>
