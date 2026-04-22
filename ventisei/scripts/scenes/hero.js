@@ -5,23 +5,37 @@ const HERO_ASCII = ' .,:;~-=+*#%@';
 export function initHero({ reducedMotion }) {
   // Hero intro motion
   if (window.gsap && !reducedMotion) {
-    const tl = window.gsap.timeline({ delay: 0.3 });
-    tl.to('.hero-established', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
-    tl.to('.hero-title-line span', { y: '0%', duration: 1.2, stagger: 0.1, ease: 'power4.out' }, '-=0.6');
-    tl.to('.hero-kicker, .hero-desc', { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.4');
-    tl.to('.hero-cta', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.55');
+    const tl = window.gsap.timeline({ delay: 0.22 });
+    tl.to('.hero-established', { opacity: 1, y: 0, duration: 0.95, ease: 'power3.out' });
+    tl.to('.hero-title-line span', { y: '0%', duration: 1.15, stagger: 0.12, ease: 'power4.out' }, '-=0.55');
+    tl.to('.hero-kicker, .hero-desc', { opacity: 1, duration: 0.95, ease: 'power2.out' }, '-=0.45');
+    tl.to('.hero-cta', { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, '-=0.5');
 
     const heroInner = document.querySelector('.hero-inner');
-    if (heroInner) {
+    const heroStack = document.querySelector('.hero-stack');
+    if (heroStack) {
       document.addEventListener(
         'mousemove',
         (e) => {
           const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
           const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
-          window.gsap.to(heroInner, { x: xRatio * 15, y: yRatio * 8, duration: 1.5, ease: 'power2.out' });
+          window.gsap.to(heroStack, { x: xRatio * 10, y: yRatio * 6, duration: 1.4, ease: 'power2.out' });
         },
         { passive: true }
       );
+    }
+
+    if (heroInner && window.ScrollTrigger) {
+      window.gsap.to(heroInner, {
+        y: -48,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.65,
+        },
+      });
     }
   } else {
     // Reduced motion: force visible states
@@ -89,7 +103,7 @@ export function initHero({ reducedMotion }) {
 
     ctx.clearRect(0, 0, W, H);
     ctx.textBaseline = 'top';
-    ctx.font = `${Math.floor(cell * 0.92)}px "Space Mono", ui-monospace, monospace`;
+    ctx.font = `${Math.floor(cell * 0.92)}px "Inter", system-ui, sans-serif`;
 
     // Soft falloff so the copy stays crisp.
     const cx = W * 0.44;
@@ -115,7 +129,7 @@ export function initHero({ reducedMotion }) {
         if ((x + y) % 2 === 1 && a < 0.07) continue;
 
         const isAccent = (x * 13 + y * 7) % 37 === 0;
-        ctx.fillStyle = isAccent ? `rgba(0,179,179,${a * 0.9})` : `rgba(17,17,17,${a})`;
+        ctx.fillStyle = isAccent ? `rgba(26,107,92,${a * 0.85})` : `rgba(10,10,10,${a})`;
         ctx.fillText(ch, px, py);
       }
     }

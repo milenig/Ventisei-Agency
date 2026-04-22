@@ -42,7 +42,7 @@ export function initAsciiBlog({ reducedMotion }) {
       const t = nowMs * 0.001;
       ctx.fillStyle = '#060606';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${cell * 0.95}px "Space Mono", ui-monospace, monospace`;
+      ctx.font = `${cell * 0.95}px "Inter", system-ui, sans-serif`;
       ctx.textBaseline = 'top';
 
       for (let y = 0; y < rows; y++) {

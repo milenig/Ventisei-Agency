@@ -84,7 +84,7 @@ export function initAsciiAbout({ reducedMotion }) {
     resize();
     ctx.clearRect(0, 0, W, H);
     ctx.textBaseline = 'top';
-    ctx.font = `${Math.floor(cell * 0.95)}px "Space Mono", ui-monospace, monospace`;
+    ctx.font = `${Math.floor(cell * 0.95)}px "Inter", system-ui, sans-serif`;
 
     // Layout head template
     const headW = Math.max(...HEAD.map((l) => l.length));
@@ -134,7 +134,7 @@ export function initAsciiAbout({ reducedMotion }) {
       // Draw character
       const alpha = clamp(0.18 + 0.22 * (0.5 + 0.5 * Math.sin(t * 0.9 + p.phase)), 0.18, 0.46);
       const useCyan = (i % 7 === 0) || dist < Math.max(70, 110 * dpr);
-      const rgb = useCyan ? '0,179,179' : '17,17,17';
+      const rgb = useCyan ? '26,107,92' : '10,10,10';
       ctx.fillStyle = `rgba(${rgb},${alpha})`;
       ctx.fillText(p.ch, p.x * W, p.y * H);
     }

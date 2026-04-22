@@ -7,9 +7,10 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   overflow-x: hidden;
   cursor: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Avoid horizontal scroll when using rotated rail */
@@ -29,25 +30,27 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9990;
-  opacity: 0.025;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
 }
 
 /* Global utility components */
 .micro-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
 .micro-label--cyan { color: var(--cyan); }
 
 .section-number {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   color: var(--cyan);
 }
 
@@ -55,5 +58,6 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
-  .reveal-up { opacity: 1; transform: none; }
+  .reveal-up,
+  .reveal-scrub { opacity: 1; transform: none; }
 }

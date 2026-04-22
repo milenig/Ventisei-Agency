@@ -1,76 +1,150 @@
-export function initMethodScroll({ reducedMotion }) {
-  const root = document.querySelector('.methodScroll');
-  if (!root) return;
+import { METHOD_PROCESS_STEPS, METHOD_TEXT_PROGRESS_WINDOWS } from '../data/methodProcessSteps.js';
+import {
+  textWindowStyle,
+  stepIndexInTextWindows,
+  textWindowCenterProgress,
+} from './methodProgressMap.js';
+import { morphProcessVisual } from '../scenes/processGeometry.js';
 
-  const section = document.getElementById('method');
-  const panel = root.querySelector('.methodScroll-panel');
-  const visualItems = Array.from(root.querySelectorAll('.methodScroll-visualItem'));
-  const tabs = Array.from(root.querySelectorAll('.methodScroll-tab[data-step]'));
-
-  if (!section || !panel || !visualItems.length || !tabs.length) return;
-
-  function setActive(step) {
-    const s = String(step);
-    visualItems.forEach((el) => el.classList.toggle('is-active', (el.getAttribute('data-step') || '') === s));
-    tabs.forEach((btn) => {
-      const isActive = (btn.getAttribute('data-step') || '') === s;
-      btn.classList.toggle('is-active', isActive);
-      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-    });
-
-    // Ensure blueprint draw animation kicks in per step.
-    const activeSvg = root.querySelector(`.methodScroll-visualItem[data-step="${s}"] svg`);
-    activeSvg?.querySelectorAll?.('.draw-line')?.forEach((l) => l.classList.add('drawn'));
-  }
-
-  // Reduced motion: show all visuals stacked and stop here.
-  if (reducedMotion || !window.gsap || !window.ScrollTrigger) {
-    visualItems.forEach((el) => el.classList.add('is-active'));
-    setActive('1');
-    return;
-  }
-
-  // Activate centered fixed panel only while section is in view.
-  const st = window.ScrollTrigger.create({
-    trigger: section,
-    start: 'top 70%',
-    end: 'bottom 30%',
-    onEnter: () => section.classList.add('is-active'),
-    onEnterBack: () => section.classList.add('is-active'),
-    onLeave: () => section.classList.remove('is-active'),
-    onLeaveBack: () => section.classList.remove('is-active'),
-  });
-
-  // Scrub step changes while section scrolls (panel stays fixed/centered).
-  window.ScrollTrigger.create({
-    trigger: root,
-    start: 'top center',
-    end: 'bottom center',
-    scrub: true,
-    onUpdate: (self) => {
-      const p = self.progress;
-      const idx = p < 0.34 ? 1 : p < 0.68 ? 2 : 3;
-      setActive(String(idx));
-    },
-  });
-
-  function scrollToStep(step) {
-    const s = String(step);
-    // Jump within the methodScroll range.
-    const trig = window.ScrollTrigger.getAll().find((x) => x?.vars?.trigger === root && x.vars?.scrub);
-    const range = trig || null;
-    if (!range) return;
-    const p = s === '1' ? 0.0 : s === '2' ? 0.34 : 0.68;
-    const y = range.start + (range.end - range.start) * p;
-    window.scrollTo({ top: y + 2, behavior: 'smooth' });
-  }
-
-  tabs.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const step = btn.getAttribute('data-step') || '1';
-      scrollToStep(step);
-    });
+function hydrateStepsFromData(root) {
+  const articles = Array.from(root.querySelectorAll('.methodProcess-step'));
+  METHOD_PROCESS_STEPS.forEach((step, i) => {
+    const el = articles[i];
+    if (!el) return;
+    const roman = el.querySelector('.methodProcess-roman');
+    const title = el.querySelector('.methodProcess-stepTitle');
+    const body = el.querySelector('.methodProcess-stepBody');
+    if (roman) roman.textContent = step.roman;
+    if (title) title.id = `method-step-${step.id}-title`;
+    if (title) title.textContent = step.title;
+    if (body) body.textContent = step.description;
+    el.dataset.step = step.id;
+    el.setAttribute('aria-labelledby', `method-step-${step.id}-title`);
+    el.id = `method-step-${step.id}`;
   });
 }
 
+function runVisualPresence({ root, frame, targetIdx }) {
+  const step = METHOD_PROCESS_STEPS[targetIdx];
+  if (!step) return null;
+
+  if (!window.gsap) {
+    morphProcessVisual(String(step.visualIndex + 1), { root, instant: true });
+    return null;
+  }
+
+  return window.gsap
+    .timeline({ defaults: { overwrite: 'auto' } })
+    .to(frame, { opacity: 0, duration: 0.22, ease: 'power2.in' })
+    .call(() => morphProcessVisual(String(step.visualIndex + 1), { root, instant: true }))
+    .to(frame, { opacity: 1, duration: 0.28, ease: 'power2.out' });
+}
+
+export function initMethodScroll({ reducedMotion, lenis = null } = {}) {
+  const root = document.querySelector('.methodProcess');
+  const scrollRoom = root?.querySelector('[data-method-scroll-room]');
+  const stickyShell = root?.querySelector('.methodProcess-stickyShell');
+  const steps = root ? Array.from(root.querySelectorAll('.methodProcess-step')) : [];
+  const frame = root?.querySelector('.methodProcess-frame');
+
+  if (!root || !scrollRoom || !stickyShell || !steps.length || !frame) return;
+
+  hydrateStepsFromData(root);
+
+  root.classList.add('methodProcess--motionReady');
+
+  const windows = METHOD_TEXT_PROGRESS_WINDOWS;
+  let stInstance = null;
+  /** Last step index (0-based) whose visual was committed; gaps keep this value. */
+  let displayedVisualIndex = 0;
+  let presenceTween = null;
+
+  morphProcessVisual(String(METHOD_PROCESS_STEPS[0].visualIndex + 1), { root, instant: true });
+
+  function applyFromProgress(p) {
+    const clamped = Math.max(0, Math.min(1, p));
+
+    if (reducedMotion) {
+      const idx = stepIndexInTextWindows(clamped, windows);
+      steps.forEach((el, i) => {
+        const on = idx !== null && i === idx;
+        el.style.opacity = on ? '1' : '0';
+        el.style.transform = 'translateY(-50%)';
+        el.classList.toggle('is-active', on);
+        el.tabIndex = on ? 0 : -1;
+        el.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      root.dataset.activeStep = String((idx === null ? displayedVisualIndex : idx) + 1);
+      if (idx !== null && idx !== displayedVisualIndex) {
+        displayedVisualIndex = idx;
+        morphProcessVisual(String(METHOD_PROCESS_STEPS[idx].visualIndex + 1), { root, instant: true });
+      }
+      return;
+    }
+
+    steps.forEach((el, i) => {
+      const [a, b] = windows[i] || [0, 1];
+      const { opacity, y } = textWindowStyle(clamped, a, b);
+      el.style.opacity = String(opacity);
+      el.style.transform = `translateY(calc(-50% + ${y.toFixed(2)}px))`;
+      const active = opacity > 0.55;
+      el.classList.toggle('is-active', active);
+      el.tabIndex = active ? 0 : -1;
+      el.setAttribute('aria-hidden', opacity < 0.08 ? 'true' : 'false');
+    });
+
+    const windowIdx = stepIndexInTextWindows(clamped, windows);
+    if (windowIdx !== null && windowIdx !== displayedVisualIndex) {
+      presenceTween?.kill();
+      presenceTween = runVisualPresence({ root, frame, targetIdx: windowIdx });
+      displayedVisualIndex = windowIdx;
+    }
+
+    const labelIdx = windowIdx === null ? displayedVisualIndex + 1 : windowIdx + 1;
+    root.dataset.activeStep = String(labelIdx);
+  }
+
+  function scrollToStepIndex(idx) {
+    if (!stInstance) return;
+    const p = textWindowCenterProgress(windows, idx);
+    const y = stInstance.start + (stInstance.end - stInstance.start) * p;
+    if (typeof lenis?.scrollTo === 'function') {
+      lenis.scrollTo(y, { immediate: false });
+    } else {
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  if (!window.ScrollTrigger) {
+    applyFromProgress(0);
+    return;
+  }
+
+  stInstance = window.ScrollTrigger.create({
+    id: 'method-process-scroll',
+    trigger: scrollRoom,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: reducedMotion ? false : 0.65,
+    invalidateOnRefresh: true,
+    onUpdate(self) {
+      applyFromProgress(self.progress);
+    },
+  });
+
+  applyFromProgress(stInstance.progress || 0);
+
+  steps.forEach((stepEl, i) => {
+    stepEl.addEventListener('click', () => scrollToStepIndex(i));
+    stepEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        scrollToStepIndex(i);
+      }
+    });
+  });
+
+  requestAnimationFrame(() => {
+    window.ScrollTrigger?.refresh();
+  });
+}

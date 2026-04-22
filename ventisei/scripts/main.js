@@ -29,6 +29,6 @@ initHero({ reducedMotion });
 initArchiveHoverShaders({ reducedMotion });
 initAsciiBlog({ reducedMotion });
 initAsciiAbout({ reducedMotion });
-initMethodScroll({ reducedMotion });
+initMethodScroll({ reducedMotion, lenis });
 initReveals({ reducedMotion });
 

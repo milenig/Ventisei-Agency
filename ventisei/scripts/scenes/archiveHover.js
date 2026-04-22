@@ -69,8 +69,8 @@ export function initArchiveHoverShaders({ reducedMotion }) {
       const cy = my * h;
       const r = Math.max(w, h) * (0.35 + 0.05 * Math.sin(t + seed));
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-      grad.addColorStop(0, 'rgba(0,179,179,0.18)');
-      grad.addColorStop(0.35, 'rgba(0,179,179,0.06)');
+      grad.addColorStop(0, 'rgba(26,107,92,0.16)');
+      grad.addColorStop(0.35, 'rgba(26,107,92,0.05)');
       grad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
