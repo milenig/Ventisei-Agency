@@ -1,18 +1,25 @@
 export function initSideMarkers({ scroller }) {
   const railLinks = Array.from(document.querySelectorAll('.index-link'));
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const rail = document.querySelector('.index-rail');
+  const nav = document.getElementById('main-nav');
   if (!railLinks.length && !navLinks.length) return;
 
   const sections = ['hero', 'about', 'works', 'method', 'services', 'testimonials', 'blog', 'contact'];
+  const darkSections = new Set(['services', 'contact']);
   const els = sections.map((id) => document.getElementById(id)).filter(Boolean);
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const idx = sections.indexOf(entry.target.id);
+        const sectionId = entry.target.id;
         railLinks.forEach((a) => a.classList.toggle('is-active', (a.getAttribute('data-section') || '') === entry.target.id));
-        navLinks.forEach((a) => a.classList.toggle('active', (a.getAttribute('href') || '') === `#${entry.target.id}`));
+        navLinks.forEach((a) => a.classList.toggle('active', (a.getAttribute('href') || '') === `#${sectionId}`));
+        const onDark = darkSections.has(sectionId);
+        if (rail) rail.classList.toggle('is-on-dark', onDark);
+        if (rail) rail.classList.toggle('is-hidden', sectionId === 'services');
+        if (nav) nav.classList.toggle('is-on-dark', onDark);
       });
     },
     { threshold: 0.5 }

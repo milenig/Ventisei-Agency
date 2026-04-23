@@ -7,30 +7,27 @@
     <title>Ventisei &amp; Brands — Kreativna agencija</title>
     <meta name="description" content="Ventisei & Brands: brending, strategija, dizajn, digital i događaji. Izgradnja jasnog izraza i doslednog prisustva na tržištu.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/tokens.css?v=2026-04-24-integrated">
     <link rel="stylesheet" href="./styles/base.css?v=2026-04-24-integrated">
     <link rel="stylesheet" href="./styles/sections.css?v=2026-04-22-no-dark-stage">
   </head>
 
   <body>
-    <aside class="index-rail" aria-hidden="true">
-      <a class="index-link is-active" href="#hero" data-section="hero"><span class="index-num">01</span> <span class="index-label">Početak</span></a>
-      <a class="index-link" href="#about" data-section="about"><span class="index-num">02</span> <span class="index-label">O nama</span></a>
-      <a class="index-link" href="#works" data-section="works"><span class="index-num">03</span> <span class="index-label">Portfolio</span></a>
-      <a class="index-link" href="#method" data-section="method"><span class="index-num">04</span> <span class="index-label">Pristup</span></a>
-      <a class="index-link" href="#services" data-section="services"><span class="index-num">05</span> <span class="index-label">Usluge</span></a>
-      <a class="index-link" href="#testimonials" data-section="testimonials"><span class="index-num">06</span> <span class="index-label">Utisci</span></a>
-      <a class="index-link" href="#blog" data-section="blog"><span class="index-num">07</span> <span class="index-label">Blog</span></a>
-      <a class="index-link" href="#contact" data-section="contact"><span class="index-num">08</span> <span class="index-label">Kontakt</span></a>
-    </aside>
-
-    <nav id="main-nav" class="nav">
-      <div class="container nav-inner">
-        <a class="nav-brand" href="#hero">Ventisei &amp; brands</a>
-        <a href="#contact" class="nav-cta">Pošalji upit</a>
+    <aside class="index-rail">
+      <a class="index-rail-brand" href="#hero" aria-label="Ventisei">
+        <span class="nav-brand-mark" aria-hidden="true"></span>
+        <span class="index-rail-brand-text">Ventisei</span>
+      </a>
+      <div class="index-links" role="navigation" aria-label="Primary">
+        <a class="index-link is-active" href="#about" data-section="about"><span class="index-num">01</span><span class="index-label">Mission</span></a>
+        <a class="index-link" href="#works" data-section="works"><span class="index-num">02</span><span class="index-label">Works</span></a>
+        <a class="index-link" href="#method" data-section="method"><span class="index-num">03</span><span class="index-label">Process</span></a>
+        <a class="index-link" href="#services" data-section="services"><span class="index-num">04</span><span class="index-label">Services</span></a>
+        <a class="index-link" href="#blog" data-section="blog"><span class="index-num">05</span><span class="index-label">News</span></a>
+        <a class="index-link" href="#contact" data-section="contact"><span class="index-num">06</span><span class="index-label">Contact</span></a>
       </div>
-    </nav>
+    </aside>
 
     <section id="hero" class="section section-hero">
       <canvas id="hero-canvas" aria-hidden="true"></canvas>
@@ -335,10 +332,11 @@
               <span class="section-label">Usluge</span>
             </div>
           </div>
-          <h2 class="section-title reveal-scrub">Šta radimo</h2>
+          <h2 class="section-title reveal-scrub">Usluge koje povezuju identitet, kampanje i digitalnu realizaciju.</h2>
         </header>
 
-        <div class="services-grid">
+        <div class="services-horizontal" data-services-horizontal>
+          <div class="services-grid">
           <article class="service-card">
             <div class="service-num">01.</div>
             <h3 class="service-name">BRENDING</h3>
@@ -422,6 +420,7 @@
               <span class="tag">live_iskustvo</span>
             </div>
           </article>
+          </div>
         </div>
       </div>
     </section>

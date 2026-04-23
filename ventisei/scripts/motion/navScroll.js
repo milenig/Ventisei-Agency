@@ -5,13 +5,13 @@ export function initNavScroll() {
   const onScroll = () => {
     const curr = window.scrollY;
     if (curr > 100) {
-      nav.style.background = 'rgba(240, 237, 232, 0.92)';
-      nav.style.backdropFilter = 'blur(12px)';
+      nav.style.background = 'rgba(255, 255, 255, 0.96)';
+      nav.style.backdropFilter = 'blur(10px)';
       nav.style.borderBottom = '1px solid rgba(0,0,0,0.06)';
     } else {
-      nav.style.background = 'transparent';
-      nav.style.backdropFilter = 'none';
-      nav.style.borderBottom = 'none';
+      nav.style.background = 'rgba(255, 255, 255, 0.92)';
+      nav.style.backdropFilter = 'blur(10px)';
+      nav.style.borderBottom = '1px solid rgba(0,0,0,0.06)';
     }
   };
 

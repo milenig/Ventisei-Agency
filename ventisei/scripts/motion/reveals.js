@@ -1,6 +1,6 @@
 export function initReveals({ reducedMotion }) {
   const motionEls =
-    '.reveal-up, .archive-tile, .service-card, .service-block, .method-col, .testimonial, .blog-card';
+    '.reveal-up, .archive-tile, .service-block, .method-col, .testimonial, .blog-card';
 
   if (reducedMotion || !window.gsap || !window.ScrollTrigger) {
     document
@@ -70,17 +70,6 @@ export function initReveals({ reducedMotion }) {
           delay: i * 0.06,
           ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-        });
-      });
-
-      window.gsap.utils.toArray('.service-card').forEach((el, i) => {
-        window.gsap.to(el, {
-          opacity: 1,
-          y: 0,
-          duration: 0.95,
-          delay: i * 0.05,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
         });
       });
 

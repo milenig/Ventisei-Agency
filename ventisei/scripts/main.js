@@ -9,6 +9,7 @@ import { initReveals } from './motion/reveals.js';
 import { initAsciiBlog } from './asciiBlog.js';
 import { initAsciiAbout } from './asciiAbout.js';
 import { initMethodScroll } from './motion/methodScroll.js';
+import { initServicesHorizontal } from './motion/servicesHorizontal.js';
 
 function prefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -30,5 +31,6 @@ initArchiveHoverShaders({ reducedMotion });
 initAsciiBlog({ reducedMotion });
 initAsciiAbout({ reducedMotion });
 initMethodScroll({ reducedMotion, lenis });
+initServicesHorizontal({ reducedMotion });
 initReveals({ reducedMotion });
 

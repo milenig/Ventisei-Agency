@@ -14,7 +14,7 @@
   /* David-like process: inactive copy reads as light gray, not mid-gray */
   --david-process-idle: rgba(10, 10, 10, 0.11);
 
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-display: 'Inter', system-ui, sans-serif;
   --font-mono: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
