@@ -180,8 +180,8 @@
 }
 .index-rail-brand-text {
   font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: -0.01em;
   transition: color var(--rail-theme-dur) var(--rail-theme-ease);
 }
@@ -238,8 +238,7 @@
 }
 .index-link.is-active .index-label,
 .index-link:hover .index-label { color: rgba(10, 10, 10, 0.9); }
-.index-link.is-active::before,
-.index-link:hover::before { background: rgba(10, 10, 10, 0.86); }
+.index-link.is-active::before { background: rgba(10, 10, 10, 0.86); }
 
 .index-rail.is-on-dark .index-rail-brand,
 .index-rail.is-on-dark .index-rail-brand-text {
@@ -266,8 +265,7 @@
 .index-rail.is-on-dark .index-link:hover .index-label {
   color: rgba(255, 255, 255, 0.95);
 }
-.index-rail.is-on-dark .index-link.is-active::before,
-.index-rail.is-on-dark .index-link:hover::before {
+.index-rail.is-on-dark .index-link.is-active::before {
   background: rgba(255, 255, 255, 0.92);
 }
 
@@ -278,7 +276,7 @@
     gap: 16px;
   }
   .index-rail-brand-text {
-    font-size: 14px;
+    font-size: 16px;
   }
   .index-label {
     font-size: clamp(12px, 2.6vw, 15px);
@@ -337,6 +335,7 @@
 /* HERO */
 .section-hero {
   position: relative;
+  background: #ffffff;
   min-height: min(100vh, 1200px);
   display: flex;
   flex-direction: column;
@@ -746,7 +745,50 @@
 }
 
 /* Portfolio: filter traka + fleksibilna mreža */
-/* Portfolio filters removed (for now) */
+.works-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: -14px 0 clamp(24px, 3.4vw, 40px);
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  border-radius: 999px;
+  background: rgba(248, 246, 242, 0.95);
+}
+
+.filter-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(10, 10, 10, 0.66);
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: rgba(10, 10, 10, 0.86);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.filter-btn.is-active {
+  color: rgba(255, 255, 255, 0.96);
+  background: #0b1130;
+  border-color: #0b1130;
+  box-shadow: 0 6px 22px rgba(8, 13, 35, 0.24);
+}
+
+.filter-btn:focus-visible {
+  outline: 2px solid rgba(26, 107, 92, 0.5);
+  outline-offset: 2px;
+}
 
 /* Works filtered mode: reflow tiles without mosaic gaps */
 #works.works--filtered .archive-grid {
@@ -772,6 +814,20 @@
     grid-column: span 2;
     aspect-ratio: 21 / 9;
     min-height: 220px;
+  }
+}
+@media (max-width: 760px) {
+  .works-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+    margin-top: -8px;
+    border-radius: 16px;
+  }
+  .filter-btn {
+    flex: 0 0 auto;
+    padding: 9px 16px;
+    font-size: 13px;
   }
 }
 
@@ -1416,7 +1472,7 @@
   gap: clamp(28px, 4vw, 48px);
 }
 .testimonial { grid-column: span 4; border-top: 1px solid var(--border); padding-top: 22px; }
-.testimonial blockquote { font-family: var(--font-display); font-size: clamp(19px, 1.6vw, 24px); font-weight: 500; letter-spacing: -0.02em; text-transform: none; line-height: 1.34; color: rgba(10, 10, 10, 0.82); }
+.testimonial blockquote { font-family: var(--font-display); font-size: clamp(16px, 1.25vw, 20px); font-weight: 500; letter-spacing: -0.02em; text-transform: none; line-height: 1.34; color: rgba(10, 10, 10, 0.82); }
 .testimonial figcaption { margin-top: 16px; display:flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .t-name { font-family: var(--font-body); font-weight: 600; letter-spacing: 0.02em; text-transform: none; font-size: 14px; }
 .t-role { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; color: var(--ink-muted); }
@@ -1554,7 +1610,7 @@
 }
 
 .footer-logo {
-  font-family: var(--font-body);
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   font-size: clamp(16px, 1.8vw, 20px);
   letter-spacing: 0.03em;

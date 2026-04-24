@@ -12,7 +12,11 @@ export function initPortfolioFilters() {
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const f = (btn.getAttribute('data-filter') || 'sve').toLowerCase();
-      buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+      buttons.forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle('is-active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
 
       // Mosaic for "sve", fluid reflow for filtered categories.
       root.classList.toggle('works--filtered', f !== 'sve');

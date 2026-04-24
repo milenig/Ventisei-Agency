@@ -16,7 +16,6 @@
   <body>
     <aside class="index-rail">
       <a class="index-rail-brand" href="#hero" aria-label="Ventisei">
-        <span class="nav-brand-mark" aria-hidden="true"></span>
         <span class="index-rail-brand-text">Ventisei</span>
       </a>
       <div class="index-links" role="navigation" aria-label="Primary">
@@ -103,10 +102,18 @@
               <span class="section-index" aria-hidden="true">03</span>
               <span class="section-label">Portfolio</span>
             </div>
-            <div class="section-meta micro-label">Pregled po kategorijama</div>
           </div>
           <h2 class="section-title reveal-scrub">Izabrani radovi</h2>
         </header>
+
+        <div class="works-tabs" role="tablist" aria-label="Tip projekta">
+          <button class="filter-btn is-active" type="button" data-filter="sve" role="tab" aria-selected="true">Svi</button>
+          <button class="filter-btn" type="button" data-filter="web" role="tab" aria-selected="false">Web dizajn</button>
+          <button class="filter-btn" type="button" data-filter="brending" role="tab" aria-selected="false">Brending</button>
+          <button class="filter-btn" type="button" data-filter="oglasavanje" role="tab" aria-selected="false">Oglašavanje</button>
+          <button class="filter-btn" type="button" data-filter="dizajn" role="tab" aria-selected="false">Dizajn</button>
+          <button class="filter-btn" type="button" data-filter="dogadaji" role="tab" aria-selected="false">Događaji</button>
+        </div>
 
         <div class="archive-grid">
           <article class="archive-tile archive-tile--a" data-category="brending">
@@ -179,7 +186,7 @@
       <div class="container--wide">
         <header class="davidProcessHead" aria-labelledby="method-manifesto-title">
           <div class="davidProcessHead-eyebrow">
-            <span class="davidProcessHead-index" aria-hidden="true">4</span>
+            <span class="section-index" aria-hidden="true">04</span>
             <span class="davidProcessHead-vline" aria-hidden="true"></span>
             <span class="davidProcessHead-label">Proces</span>
           </div>

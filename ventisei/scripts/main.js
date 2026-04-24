@@ -10,6 +10,7 @@ import { initAsciiBlog } from './asciiBlog.js';
 import { initAsciiAbout } from './asciiAbout.js';
 import { initMethodScroll } from './motion/methodScroll.js';
 import { initServicesHorizontal } from './motion/servicesHorizontal.js';
+import { initPortfolioFilters } from './portfolioFilter.js';
 
 function prefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -32,5 +33,6 @@ initAsciiBlog({ reducedMotion });
 initAsciiAbout({ reducedMotion });
 initMethodScroll({ reducedMotion, lenis });
 initServicesHorizontal({ reducedMotion });
+initPortfolioFilters();
 initReveals({ reducedMotion });
 
