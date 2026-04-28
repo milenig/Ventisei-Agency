@@ -1425,11 +1425,10 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.03);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: none;
 }
 .blog-card:hover {
-  border-color: rgba(26, 107, 92, 0.25);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
 }
 .blog-ascii-wrap {
   position: relative;
@@ -1471,17 +1470,17 @@
   font-size: clamp(17px, 1.5vw, 22px);
   line-height: 1.24;
   letter-spacing: -0.02em;
-}
-.blog-title a {
   color: var(--ink);
-  text-decoration: none;
   transition: color 0.2s ease;
 }
-.blog-title a:hover {
-  color: var(--cyan);
+.blog-title a,
+.blog-title a:visited {
+  color: inherit;
+  text-decoration: none;
 }
-.blog-card:hover .blog-title a {
-  color: var(--cyan);
+.blog-title a:hover,
+.blog-title a:focus-visible {
+  color: var(--ink);
 }
 .blog-excerpt {
   margin: 0;
