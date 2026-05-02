@@ -12,14 +12,32 @@ export function initHero({ reducedMotion }) {
     tl.to('.hero-cta', { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, '-=0.5');
 
     const heroInner = document.querySelector('.hero-inner');
-    const heroStack = document.querySelector('.hero-stack');
-    if (heroStack) {
+    const heroSection = document.getElementById('hero');
+    const heroVisualLayer = document.querySelector('.hero-visual__layer');
+    const HERO_VISUAL_BASE_OPACITY = 0.35;
+    const HERO_VISUAL_OPACITY_DELTA = 0.06;
+
+    if (heroSection && heroVisualLayer) {
       document.addEventListener(
         'mousemove',
         (e) => {
-          const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
-          const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
-          window.gsap.to(heroStack, { x: xRatio * 10, y: yRatio * 6, duration: 1.4, ease: 'power2.out' });
+          const rect = heroSection.getBoundingClientRect();
+          const w = Math.max(1, rect.width);
+          const h = Math.max(1, rect.height);
+          const nx = Math.min(1, Math.max(0, (e.clientX - rect.left) / w));
+          const ny = Math.min(1, Math.max(0, (e.clientY - rect.top) / h));
+          const opacity = Math.min(
+            0.44,
+            Math.max(0.26, HERO_VISUAL_BASE_OPACITY + (nx - 0.5) * HERO_VISUAL_OPACITY_DELTA * 2 + (ny - 0.5) * HERO_VISUAL_OPACITY_DELTA * 2)
+          );
+
+          window.gsap.to(heroVisualLayer, {
+            x: (nx - 0.5) * 12,
+            y: (ny - 0.5) * 10,
+            opacity,
+            duration: 1.35,
+            ease: 'power2.out',
+          });
         },
         { passive: true }
       );
