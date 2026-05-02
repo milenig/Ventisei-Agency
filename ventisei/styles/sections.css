@@ -930,6 +930,10 @@
 .about-lead strong {
   font-weight: 800;
 }
+.about-lead--scroll-reveal .about-lead__word {
+  display: inline;
+  opacity: 0.1;
+}
 .about-body {
   column-count: 2;
   column-gap: clamp(28px, 4vw, 56px);

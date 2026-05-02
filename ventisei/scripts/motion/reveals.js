@@ -1,3 +1,42 @@
+/** Split lead copy into word spans for scroll-scrubbed opacity; keeps strong as one unit. */
+function wrapAboutLeadWords(paragraph) {
+  const textNodes = [];
+  const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT, null);
+  let n;
+  while ((n = walker.nextNode())) textNodes.push(n);
+
+  textNodes.forEach((node) => {
+    if (!node.parentNode || !paragraph.contains(node)) return;
+
+    const parent = node.parentNode;
+    if (parent.tagName === 'STRONG') {
+      const span = document.createElement('span');
+      span.className = 'about-lead__word';
+      parent.parentNode.insertBefore(span, parent);
+      span.appendChild(parent);
+      return;
+    }
+
+    const text = node.textContent;
+    const parts = text.split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    let hasWordSpans = false;
+    parts.forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) {
+        frag.appendChild(document.createTextNode(part));
+      } else {
+        hasWordSpans = true;
+        const span = document.createElement('span');
+        span.className = 'about-lead__word';
+        span.textContent = part;
+        frag.appendChild(span);
+      }
+    });
+    if (hasWordSpans) node.parentNode.replaceChild(frag, node);
+  });
+}
+
 export function initReveals({ reducedMotion }) {
   const motionEls =
     '.reveal-up, .archive-tile, .service-block, .method-col, .testimonial, .blog-card';
@@ -12,6 +51,8 @@ export function initReveals({ reducedMotion }) {
     document.querySelectorAll('.draw-line').forEach((l) => l.classList.add('drawn'));
     return;
   }
+
+  document.querySelectorAll('.about-lead--scroll-reveal').forEach(wrapAboutLeadWords);
 
   window.gsap.set(motionEls, {
     opacity: 0,
@@ -102,6 +143,22 @@ export function initReveals({ reducedMotion }) {
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        });
+      });
+
+      window.gsap.utils.toArray('.about-lead--scroll-reveal').forEach((el) => {
+        const words = el.querySelectorAll('.about-lead__word');
+        if (!words.length) return;
+        window.gsap.to(words, {
+          opacity: 1,
+          ease: 'none',
+          stagger: { each: 0.055, ease: 'none' },
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            end: 'bottom 55%',
+            scrub: 0.75,
+          },
         });
       });
 
