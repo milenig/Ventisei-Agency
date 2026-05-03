@@ -385,13 +385,59 @@
   z-index: 2;
 }
 
+.hero-visual__stack {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
 .hero-visual__layer {
   position: absolute;
   inset: 0;
-  background: url(../assets/heroimage.png) center / cover no-repeat;
-  opacity: 0.35;
-  will-change: transform, opacity;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
+  opacity: 0.35;
+}
+
+.hero-visual__layer--base {
+  background-image: url(../assets/heroimage.png);
+  z-index: 0;
+}
+
+.hero-visual__layer--metallic {
+  --reveal-x: 50%;
+  --reveal-y: 50%;
+  --reveal-r: 0px;
+  --reveal-feather: 0px;
+  background-image: url(../assets/heroimage-metallic-hover.png);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+  -webkit-mask-image: radial-gradient(
+    circle calc(var(--reveal-r) + var(--reveal-feather)) at var(--reveal-x) var(--reveal-y),
+    #fff 0,
+    #fff calc(var(--reveal-r) * 0.35),
+    rgba(255, 255, 255, 0.55) calc(var(--reveal-r) + var(--reveal-feather) * 0.28),
+    rgba(255, 255, 255, 0.22) calc(var(--reveal-r) + var(--reveal-feather) * 0.62),
+    rgba(255, 255, 255, 0.06) calc(var(--reveal-r) + var(--reveal-feather) * 0.88),
+    transparent calc(var(--reveal-r) + var(--reveal-feather))
+  );
+  mask-image: radial-gradient(
+    circle calc(var(--reveal-r) + var(--reveal-feather)) at var(--reveal-x) var(--reveal-y),
+    #fff 0,
+    #fff calc(var(--reveal-r) * 0.35),
+    rgba(255, 255, 255, 0.55) calc(var(--reveal-r) + var(--reveal-feather) * 0.28),
+    rgba(255, 255, 255, 0.22) calc(var(--reveal-r) + var(--reveal-feather) * 0.62),
+    rgba(255, 255, 255, 0.06) calc(var(--reveal-r) + var(--reveal-feather) * 0.88),
+    transparent calc(var(--reveal-r) + var(--reveal-feather))
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
 }
 
 .hero-visual::after {

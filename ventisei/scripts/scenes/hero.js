@@ -13,11 +13,12 @@ export function initHero({ reducedMotion }) {
 
     const heroInner = document.querySelector('.hero-inner');
     const heroSection = document.getElementById('hero');
-    const heroVisualLayer = document.querySelector('.hero-visual__layer');
+    const heroVisualStack = document.querySelector('.hero-visual__stack');
+    const heroVisualBase = document.querySelector('.hero-visual__layer--base');
     const HERO_VISUAL_BASE_OPACITY = 0.35;
     const HERO_VISUAL_OPACITY_DELTA = 0.06;
 
-    if (heroSection && heroVisualLayer) {
+    if (heroSection && heroVisualStack) {
       document.addEventListener(
         'mousemove',
         (e) => {
@@ -31,13 +32,19 @@ export function initHero({ reducedMotion }) {
             Math.max(0.26, HERO_VISUAL_BASE_OPACITY + (nx - 0.5) * HERO_VISUAL_OPACITY_DELTA * 2 + (ny - 0.5) * HERO_VISUAL_OPACITY_DELTA * 2)
           );
 
-          window.gsap.to(heroVisualLayer, {
+          window.gsap.to(heroVisualStack, {
             x: (nx - 0.5) * 12,
             y: (ny - 0.5) * 10,
-            opacity,
             duration: 1.35,
             ease: 'power2.out',
           });
+          if (heroVisualBase) {
+            window.gsap.to(heroVisualBase, {
+              opacity,
+              duration: 1.35,
+              ease: 'power2.out',
+            });
+          }
         },
         { passive: true }
       );
@@ -59,6 +66,130 @@ export function initHero({ reducedMotion }) {
     // Reduced motion: force visible states
     document.querySelectorAll('.hero-established,.hero-kicker,.hero-desc,.hero-cta').forEach((el) => el && (el.style.opacity = '1'));
     document.querySelectorAll('.hero-title-line span').forEach((el) => (el.style.transform = 'translateY(0%)'));
+  }
+
+  if (!reducedMotion) {
+    const heroVisual = document.querySelector('.hero-visual');
+    const heroMetallic = document.querySelector('.hero-visual__layer--metallic');
+    const finePointer =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (heroVisual && heroMetallic && finePointer) {
+      let heroImgAspect = null;
+      const probe = new Image();
+      probe.onload = () => {
+        if (probe.naturalWidth > 0 && probe.naturalHeight > 0) {
+          heroImgAspect = probe.naturalWidth / probe.naturalHeight;
+        }
+      };
+      probe.src = new URL('assets/heroimage.png', window.location.href).href;
+
+      const containedImageRect = (elW, elH, aspect) => {
+        if (!aspect || elW <= 0 || elH <= 0) {
+          return { x: 0, y: 0, w: elW, h: elH };
+        }
+        const elAspect = elW / elH;
+        if (elAspect > aspect) {
+          const h = elH;
+          const w = elH * aspect;
+          return { x: (elW - w) / 2, y: 0, w, h };
+        }
+        const w = elW;
+        const h = elW / aspect;
+        return { x: 0, y: (elH - h) / 2, w, h };
+      };
+
+      const isInsideImage = (px, py, ir) =>
+        px >= ir.x && px <= ir.x + ir.w && py >= ir.y && py <= ir.y + ir.h;
+
+      const revealRadius = () => {
+        const rect = heroMetallic.getBoundingClientRect();
+        const m = Math.min(rect.width, rect.height);
+        return Math.round(Math.min(180, Math.max(88, m * 0.22)));
+      };
+
+      const featherFor = (r) =>
+        r > 0 ? `${Math.round(Math.min(200, Math.max(64, r * 1.05)))}px` : '0px';
+
+      const applyRevealImmediate = (x, y, r) => {
+        heroMetallic.style.setProperty('--reveal-x', `${x}px`);
+        heroMetallic.style.setProperty('--reveal-y', `${y}px`);
+        heroMetallic.style.setProperty('--reveal-r', `${r}px`);
+        heroMetallic.style.setProperty('--reveal-feather', featherFor(r));
+      };
+
+      const collapseReveal = () => {
+        if (window.gsap) {
+          window.gsap.killTweensOf(heroMetallic);
+        }
+        applyRevealImmediate(0, 0, 0);
+      };
+
+      const tweenRevealTo = (x, y, r) => {
+        const feather = featherFor(r);
+        if (window.gsap) {
+          window.gsap.to(heroMetallic, {
+            '--reveal-x': `${x}px`,
+            '--reveal-y': `${y}px`,
+            '--reveal-r': `${r}px`,
+            '--reveal-feather': feather,
+            duration: r > 0 ? 0.38 : 0.22,
+            ease: r > 0 ? 'power3.out' : 'power2.in',
+            overwrite: 'auto',
+          });
+        } else {
+          applyRevealImmediate(x, y, r);
+        }
+      };
+
+      const pointerLocal = (e) => {
+        const rect = heroMetallic.getBoundingClientRect();
+        return {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+          rect,
+        };
+      };
+
+      const hitImage = (e) => {
+        const { x, y, rect } = pointerLocal(e);
+        const ir = containedImageRect(rect.width, rect.height, heroImgAspect);
+        return { x, y, ok: isInsideImage(x, y, ir) };
+      };
+
+      const pointerInHeroVisualBox = (e) => {
+        const rect = heroVisual.getBoundingClientRect();
+        const { clientX: gx, clientY: gy } = e;
+        return gx >= rect.left && gx <= rect.right && gy >= rect.top && gy <= rect.bottom;
+      };
+
+      const onDocPointerMove = (e) => {
+        if (!heroVisual.isConnected) return;
+        if (!pointerInHeroVisualBox(e)) {
+          collapseReveal();
+          return;
+        }
+        const { x, y, ok } = hitImage(e);
+        if (!ok) {
+          collapseReveal();
+          return;
+        }
+        tweenRevealTo(x, y, revealRadius());
+      };
+
+      document.addEventListener('pointermove', onDocPointerMove, { passive: true });
+
+      const heroRevealIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) collapseReveal();
+          });
+        },
+        { threshold: 0 }
+      );
+      heroRevealIo.observe(heroVisual);
+    }
   }
 
   // Background canvas (2D): gentle ASCII layer over CSS grid/dots.
