@@ -9,6 +9,7 @@ import { initMethodScroll } from './motion/methodScroll.js';
 import { initServicesHorizontal } from './motion/servicesHorizontal.js';
 import { initPortfolioFilters } from './portfolioFilter.js';
 import { initContactForm } from './contactForm.js';
+import { initMobileNav } from './mobileNav.js';
 
 function prefersReducedMotion() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -20,6 +21,7 @@ const reducedMotion = prefersReducedMotion();
 
 const lenis = initLenis({ enabled: !reducedMotion });
 
+initMobileNav();
 initSideMarkers({ scroller: lenis ?? window });
 initMarquee({ scroller: lenis?.scroller ?? window, reducedMotion });
 

@@ -49,3 +49,14 @@
     --rail-y: 92px;
   }
 }
+
+@media (max-width: 899px) {
+  :root {
+    --gutter: clamp(14px, 4vw, 22px);
+    --section-y: clamp(56px, 10vw, 88px);
+    --section-y-lg: clamp(72px, 12vw, 110px);
+    --nav-h: 56px;
+    --rail-x: 14px;
+    --rail-y: 12px;
+  }
+}

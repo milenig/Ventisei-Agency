@@ -39,11 +39,20 @@
 </head>
 
 <body>
+  <div class="nav-backdrop" hidden aria-hidden="true"></div>
   <aside class="index-rail">
     <a class="index-rail-brand" href="#hero" aria-label="Ventisei">
       <span class="index-rail-brand-text">Ventisei</span>
     </a>
-    <div class="index-links" role="navigation" aria-label="Primary">
+    <button type="button" class="mobile-nav-toggle" aria-expanded="false" aria-controls="primary-nav-panel"
+      aria-label="Otvori meni">
+      <span class="mobile-nav-toggle-inner" aria-hidden="true">
+        <span class="mobile-nav-toggle-bar"></span>
+        <span class="mobile-nav-toggle-bar"></span>
+        <span class="mobile-nav-toggle-bar"></span>
+      </span>
+    </button>
+    <div class="index-links" id="primary-nav-panel" role="navigation" aria-label="Glavna navigacija">
       <a class="index-link is-active" href="#about" data-section="about"><span class="index-num">01</span><span
           class="index-label">O nama</span></a>
       <a class="index-link" href="#works" data-section="works"><span class="index-num">02</span><span
@@ -319,6 +328,10 @@
               </aside>
             </div>
           </div>
+        </div>
+
+        <div class="methodProcess-mobileOnly" id="method-process-mobile-panel" hidden aria-hidden="true">
+          <div class="methodProcess-mobileStack" data-method-mobile-stack></div>
         </div>
       </div>
     </div>

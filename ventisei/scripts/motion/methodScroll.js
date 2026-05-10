@@ -4,7 +4,9 @@ import {
   stepIndexInTextWindows,
   textWindowCenterProgress,
 } from './methodProgressMap.js';
-import { morphProcessVisual } from '../scenes/processGeometry.js';
+import { morphProcessVisual, applyProcessVisualInstantToSvg } from '../scenes/processGeometry.js';
+
+const MQ_MOBILE_LAYOUT = '(max-width: 899px)';
 
 function hydrateStepsFromData(root) {
   const articles = Array.from(root.querySelectorAll('.methodProcess-step'));
@@ -24,6 +26,81 @@ function hydrateStepsFromData(root) {
   });
 }
 
+function cloneDiagramSvg(templateSvg, idPrefix) {
+  const svg = templateSvg.cloneNode(true);
+  svg.removeAttribute('id');
+  svg.querySelectorAll('[id]').forEach((node) => {
+    node.id = `${idPrefix}-${node.id}`;
+  });
+  svg.setAttribute('class', 'processGeometry-svg processGeometry-svg--mobile');
+  svg.setAttribute('aria-hidden', 'true');
+  return svg;
+}
+
+function buildMobileProcessStack(root) {
+  const stack = root.querySelector('[data-method-mobile-stack]');
+  const shell = root.querySelector('.methodProcess-mobileOnly');
+  const templateSvg = document.querySelector('#process-geometry-svg');
+  if (!stack || !shell || !templateSvg) return;
+
+  stack.replaceChildren();
+
+  METHOD_PROCESS_STEPS.forEach((step, i) => {
+    const idPrefix = `mm${i}`;
+    const svg = cloneDiagramSvg(templateSvg, idPrefix);
+    applyProcessVisualInstantToSvg(svg, step.visualIndex, idPrefix);
+
+    const row = document.createElement('article');
+    row.className = 'method-mobile-step reveal-up';
+    row.setAttribute('aria-labelledby', `method-mobile-${step.id}-title`);
+
+    const visualWrap = document.createElement('div');
+    visualWrap.className = 'method-mobile-visualWrap';
+
+    const frame = document.createElement('div');
+    frame.className = 'methodProcess-frame methodProcess-frame--mobile';
+    const visuals = document.createElement('div');
+    visuals.className = 'methodProcess-visuals';
+    const host = document.createElement('div');
+    host.className = 'methodProcess-visualHost';
+    host.appendChild(svg);
+    visuals.appendChild(host);
+    frame.appendChild(visuals);
+    visualWrap.appendChild(frame);
+
+    const copy = document.createElement('div');
+    copy.className = 'method-mobile-copy';
+
+    const title = document.createElement('h3');
+    title.className = 'method-mobile-title';
+    title.id = `method-mobile-${step.id}-title`;
+    title.textContent = step.title;
+
+    const desc = document.createElement('p');
+    desc.className = 'method-mobile-desc';
+    desc.textContent = step.description;
+
+    copy.append(title, desc);
+    row.append(visualWrap, copy);
+    stack.appendChild(row);
+  });
+
+  shell.removeAttribute('hidden');
+  shell.classList.add('is-visible');
+  shell.setAttribute('aria-hidden', 'false');
+}
+
+function teardownMobileShell(root) {
+  const stack = root.querySelector('[data-method-mobile-stack]');
+  const shell = root.querySelector('.methodProcess-mobileOnly');
+  if (stack) stack.replaceChildren();
+  if (shell) {
+    shell.setAttribute('hidden', '');
+    shell.classList.remove('is-visible');
+    shell.setAttribute('aria-hidden', 'true');
+  }
+}
+
 function runVisualPresence({ root, frame, targetIdx }) {
   const step = METHOD_PROCESS_STEPS[targetIdx];
   if (!step) return null;
@@ -41,110 +118,151 @@ function runVisualPresence({ root, frame, targetIdx }) {
 }
 
 export function initMethodScroll({ reducedMotion, lenis = null } = {}) {
-  const root = document.querySelector('.methodProcess');
-  const scrollRoom = root?.querySelector('[data-method-scroll-room]');
-  const stickyShell = root?.querySelector('.methodProcess-stickyShell');
-  const steps = root ? Array.from(root.querySelectorAll('.methodProcess-step')) : [];
-  const frame = root?.querySelector('.methodProcess-frame');
+  const mqMobile = window.matchMedia(MQ_MOBILE_LAYOUT);
+  let desktopCleanup = () => {};
 
-  if (!root || !scrollRoom || !stickyShell || !steps.length || !frame) return;
+  function syncMethodLayout() {
+    desktopCleanup();
+    desktopCleanup = () => {};
 
-  hydrateStepsFromData(root);
+    const root = document.querySelector('.methodProcess');
+    if (!root) return;
 
-  root.classList.add('methodProcess--motionReady');
-
-  const windows = METHOD_TEXT_PROGRESS_WINDOWS;
-  let stInstance = null;
-  /** Last step index (0-based) whose visual was committed; gaps keep this value. */
-  let displayedVisualIndex = 0;
-  let presenceTween = null;
-
-  morphProcessVisual(String(METHOD_PROCESS_STEPS[0].visualIndex + 1), { root, instant: true });
-
-  function applyFromProgress(p) {
-    const clamped = Math.max(0, Math.min(1, p));
-
-    if (reducedMotion) {
-      const idx = stepIndexInTextWindows(clamped, windows);
-      steps.forEach((el, i) => {
-        const on = idx !== null && i === idx;
-        el.style.opacity = on ? '1' : '0';
-        el.style.transform = 'translateY(-50%)';
-        el.classList.toggle('is-active', on);
-        el.tabIndex = on ? 0 : -1;
-        el.setAttribute('aria-hidden', on ? 'false' : 'true');
-      });
-      root.dataset.activeStep = String((idx === null ? displayedVisualIndex : idx) + 1);
-      if (idx !== null && idx !== displayedVisualIndex) {
-        displayedVisualIndex = idx;
-        morphProcessVisual(String(METHOD_PROCESS_STEPS[idx].visualIndex + 1), { root, instant: true });
-      }
+    if (mqMobile.matches) {
+      root.classList.remove('methodProcess--motionReady');
+      teardownMobileShell(root);
+      buildMobileProcessStack(root);
+      requestAnimationFrame(() => window.ScrollTrigger?.refresh());
       return;
     }
 
-    steps.forEach((el, i) => {
-      const [a, b] = windows[i] || [0, 1];
-      const { opacity, y } = textWindowStyle(clamped, a, b);
-      el.style.opacity = String(opacity);
-      el.style.transform = `translateY(calc(-50% + ${y.toFixed(2)}px))`;
-      const active = opacity > 0.55;
-      el.classList.toggle('is-active', active);
-      el.tabIndex = active ? 0 : -1;
-      el.setAttribute('aria-hidden', opacity < 0.08 ? 'true' : 'false');
-    });
+    teardownMobileShell(root);
 
-    const windowIdx = stepIndexInTextWindows(clamped, windows);
-    if (windowIdx !== null && windowIdx !== displayedVisualIndex) {
-      presenceTween?.kill();
-      presenceTween = runVisualPresence({ root, frame, targetIdx: windowIdx });
-      displayedVisualIndex = windowIdx;
-    }
+    const scrollRoom = root.querySelector('[data-method-scroll-room]');
+    const stickyShell = root.querySelector('.methodProcess-stickyShell');
+    const steps = Array.from(root.querySelectorAll('.methodProcess-step'));
+    const frame = root.querySelector('.methodProcess-frame');
 
-    const labelIdx = windowIdx === null ? displayedVisualIndex + 1 : windowIdx + 1;
-    root.dataset.activeStep = String(labelIdx);
-  }
+    if (!scrollRoom || !stickyShell || !steps.length || !frame) return;
 
-  function scrollToStepIndex(idx) {
-    if (!stInstance) return;
-    const p = textWindowCenterProgress(windows, idx);
-    const y = stInstance.start + (stInstance.end - stInstance.start) * p;
-    if (typeof lenis?.scrollTo === 'function') {
-      lenis.scrollTo(y, { immediate: false });
-    } else {
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  }
+    hydrateStepsFromData(root);
 
-  if (!window.ScrollTrigger) {
-    applyFromProgress(0);
-    return;
-  }
+    root.classList.add('methodProcess--motionReady');
 
-  stInstance = window.ScrollTrigger.create({
-    id: 'method-process-scroll',
-    trigger: scrollRoom,
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: reducedMotion ? false : 0.65,
-    invalidateOnRefresh: true,
-    onUpdate(self) {
-      applyFromProgress(self.progress);
-    },
-  });
+    const windows = METHOD_TEXT_PROGRESS_WINDOWS;
+    let stInstance = null;
+    let displayedVisualIndex = 0;
+    let presenceTween = null;
 
-  applyFromProgress(stInstance.progress || 0);
+    morphProcessVisual(String(METHOD_PROCESS_STEPS[0].visualIndex + 1), { root, instant: true });
 
-  steps.forEach((stepEl, i) => {
-    stepEl.addEventListener('click', () => scrollToStepIndex(i));
-    stepEl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        scrollToStepIndex(i);
+    function applyFromProgress(p) {
+      const clamped = Math.max(0, Math.min(1, p));
+
+      if (reducedMotion) {
+        const idx = stepIndexInTextWindows(clamped, windows);
+        steps.forEach((el, i) => {
+          const on = idx !== null && i === idx;
+          el.style.opacity = on ? '1' : '0';
+          el.style.transform = 'translateY(-50%)';
+          el.classList.toggle('is-active', on);
+          el.tabIndex = on ? 0 : -1;
+          el.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        root.dataset.activeStep = String((idx === null ? displayedVisualIndex : idx) + 1);
+        if (idx !== null && idx !== displayedVisualIndex) {
+          displayedVisualIndex = idx;
+          morphProcessVisual(String(METHOD_PROCESS_STEPS[idx].visualIndex + 1), { root, instant: true });
+        }
+        return;
       }
-    });
-  });
 
-  requestAnimationFrame(() => {
-    window.ScrollTrigger?.refresh();
-  });
+      steps.forEach((el, i) => {
+        const [a, b] = windows[i] || [0, 1];
+        const { opacity, y } = textWindowStyle(clamped, a, b);
+        el.style.opacity = String(opacity);
+        el.style.transform = `translateY(calc(-50% + ${y.toFixed(2)}px))`;
+        const active = opacity > 0.55;
+        el.classList.toggle('is-active', active);
+        el.tabIndex = active ? 0 : -1;
+        el.setAttribute('aria-hidden', opacity < 0.08 ? 'true' : 'false');
+      });
+
+      const windowIdx = stepIndexInTextWindows(clamped, windows);
+      if (windowIdx !== null && windowIdx !== displayedVisualIndex) {
+        presenceTween?.kill();
+        presenceTween = runVisualPresence({ root, frame, targetIdx: windowIdx });
+        displayedVisualIndex = windowIdx;
+      }
+
+      const labelIdx = windowIdx === null ? displayedVisualIndex + 1 : windowIdx + 1;
+      root.dataset.activeStep = String(labelIdx);
+    }
+
+    function scrollToStepIndex(idx) {
+      if (!stInstance) return;
+      const p = textWindowCenterProgress(windows, idx);
+      const y = stInstance.start + (stInstance.end - stInstance.start) * p;
+      if (typeof lenis?.scrollTo === 'function') {
+        lenis.scrollTo(y, { immediate: false });
+      } else {
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+
+    const abortCtl = new AbortController();
+    const { signal } = abortCtl;
+
+    desktopCleanup = () => {
+      presenceTween?.kill();
+      presenceTween = null;
+      abortCtl.abort();
+      window.ScrollTrigger?.getById('method-process-scroll')?.kill();
+    };
+
+    if (!window.ScrollTrigger) {
+      applyFromProgress(0);
+      requestAnimationFrame(() => window.ScrollTrigger?.refresh());
+      return;
+    }
+
+    stInstance = window.ScrollTrigger.create({
+      id: 'method-process-scroll',
+      trigger: scrollRoom,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: reducedMotion ? false : 0.65,
+      invalidateOnRefresh: true,
+      onUpdate(self) {
+        applyFromProgress(self.progress);
+      },
+    });
+
+    applyFromProgress(stInstance.progress || 0);
+
+    steps.forEach((stepEl, i) => {
+      stepEl.addEventListener(
+        'click',
+        () => scrollToStepIndex(i),
+        { signal },
+      );
+      stepEl.addEventListener(
+        'keydown',
+        (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToStepIndex(i);
+          }
+        },
+        { signal },
+      );
+    });
+
+    requestAnimationFrame(() => {
+      window.ScrollTrigger?.refresh();
+    });
+  }
+
+  syncMethodLayout();
+  mqMobile.addEventListener('change', syncMethodLayout);
 }

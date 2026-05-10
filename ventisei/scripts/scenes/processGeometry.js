@@ -5,6 +5,11 @@
 
 const ORIGIN = '160px 160px';
 
+function escapeSvgId(id) {
+  if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') return CSS.escape(id);
+  return id;
+}
+
 const STEPS = [
   {
     bg: '#e8e4dc',
@@ -48,16 +53,23 @@ function qs(root, sel) {
   return (root && root.querySelector ? root : document).querySelector(sel);
 }
 
-function applyInstant(root, idx) {
+/**
+ * Apply a frozen diagram state to an SVG (desktop `#process-geometry-svg` or mobile clone with prefixed ids).
+ * @param {SVGSVGElement} svg
+ * @param {number} idx 0..STEPS.length-1
+ * @param {string} [idPrefix] e.g. `"mm0"` for `#mm0-pg-bg`; empty string for desktop ids
+ */
+export function applyProcessVisualInstantToSvg(svg, idx, idPrefix = '') {
   const c = STEPS[idx];
-  if (!c) return;
-  const svg = qs(root, '#process-geometry-svg');
-  if (!svg) return;
+  if (!c || !svg) return;
 
-  const setAttr = (id, attrs) => {
-    const el = svg.querySelector(`#${id}`);
-    if (!el) return;
-    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, String(v)));
+  const pid = (base) => (idPrefix ? `${idPrefix}-${base}` : base);
+  const el = (base) => svg.querySelector(`#${escapeSvgId(pid(base))}`);
+
+  const setAttr = (baseId, attrs) => {
+    const node = el(baseId);
+    if (!node) return;
+    Object.entries(attrs).forEach(([k, v]) => node.setAttribute(k, String(v)));
   };
 
   setAttr('pg-bg', { fill: c.bg });
@@ -69,13 +81,19 @@ function applyInstant(root, idx) {
   setAttr('pg-vline', { x1: c.vline.x, x2: c.vline.x });
   setAttr('pg-hline', { y1: c.hline.y, y2: c.hline.y });
 
-  const rot = (el, deg) => {
-    if (!el) return;
-    el.setAttribute('transform', `rotate(${deg} 160 160)`);
+  const rot = (node, deg) => {
+    if (!node) return;
+    node.setAttribute('transform', `rotate(${deg} 160 160)`);
   };
-  rot(svg.querySelector('#pg-wire'), c.wireRotate);
-  rot(svg.querySelector('#pg-e2g'), c.e2.gRotate);
-  rot(svg.querySelector('#pg-e3g'), c.e3.gRotate);
+  rot(el('pg-wire'), c.wireRotate);
+  rot(el('pg-e2g'), c.e2.gRotate);
+  rot(el('pg-e3g'), c.e3.gRotate);
+}
+
+function applyInstant(root, idx) {
+  const svg = qs(root, '#process-geometry-svg');
+  if (!svg) return;
+  applyProcessVisualInstantToSvg(svg, idx, '');
 }
 
 /**

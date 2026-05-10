@@ -2,7 +2,12 @@ import { loop } from '../webgl/core/loop.js';
 
 const HERO_ASCII = ' .,:;~-=+*#%@';
 
+const MQ_MOBILE_LAYOUT = '(max-width: 899px)';
+
 export function initHero({ reducedMotion }) {
+  const mqMobileLayout = window.matchMedia?.(MQ_MOBILE_LAYOUT) ?? { matches: false, addEventListener: () => {} };
+  const isMobileLayout = () => mqMobileLayout.matches;
+
   // Hero intro motion
   if (window.gsap && !reducedMotion) {
     const tl = window.gsap.timeline({ delay: 0.22 });
@@ -18,7 +23,7 @@ export function initHero({ reducedMotion }) {
     const HERO_VISUAL_BASE_OPACITY = 0.35;
     const HERO_VISUAL_OPACITY_DELTA = 0.06;
 
-    if (heroSection && heroVisualStack) {
+    if (!isMobileLayout() && heroSection && heroVisualStack) {
       document.addEventListener(
         'mousemove',
         (e) => {
@@ -50,7 +55,7 @@ export function initHero({ reducedMotion }) {
       );
     }
 
-    if (heroInner && window.ScrollTrigger) {
+    if (!isMobileLayout() && heroInner && window.ScrollTrigger) {
       window.gsap.to(heroInner, {
         y: -48,
         ease: 'none',
@@ -75,7 +80,7 @@ export function initHero({ reducedMotion }) {
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    if (heroVisual && heroMetallic && finePointer) {
+    if (heroVisual && heroMetallic && finePointer && !isMobileLayout()) {
       let heroImgAspect = null;
       const probe = new Image();
       probe.onload = () => {
@@ -202,6 +207,8 @@ export function initHero({ reducedMotion }) {
   const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink')?.trim() || '#111';
   const cyan = getComputedStyle(document.documentElement).getPropertyValue('--cyan')?.trim() || '#00b3b3';
 
+  const heroSection = document.getElementById('hero');
+
   let dpr = 1;
   let cols = 0;
   let rows = 0;
@@ -210,15 +217,27 @@ export function initHero({ reducedMotion }) {
   let H = 1;
   let active = true;
 
+  function measureCssCanvasBox() {
+    if (heroSection && isMobileLayout()) {
+      const r = heroSection.getBoundingClientRect();
+      return {
+        cssW: Math.max(1, Math.round(r.width)),
+        cssH: Math.max(1, Math.round(r.height)),
+      };
+    }
+    return { cssW: window.innerWidth, cssH: window.innerHeight };
+  }
+
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const nextW = Math.max(1, Math.floor(window.innerWidth * dpr));
-    const nextH = Math.max(1, Math.floor(window.innerHeight * dpr));
+    const { cssW, cssH } = measureCssCanvasBox();
+    const nextW = Math.max(1, Math.floor(cssW * dpr));
+    const nextH = Math.max(1, Math.floor(cssH * dpr));
     if (canvas.width !== nextW || canvas.height !== nextH) {
       canvas.width = nextW;
       canvas.height = nextH;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
+      canvas.style.width = `${cssW}px`;
+      canvas.style.height = `${cssH}px`;
       W = nextW;
       H = nextH;
       cell = Math.max(8, Math.floor(10 * dpr));
@@ -228,6 +247,13 @@ export function initHero({ reducedMotion }) {
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
+
+  mqMobileLayout.addEventListener('change', resize);
+
+  if (heroSection && typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => resize());
+    ro.observe(heroSection);
+  }
 
   const io = new IntersectionObserver(
     (entries) => {
