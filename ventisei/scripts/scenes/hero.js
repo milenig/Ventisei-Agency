@@ -8,7 +8,7 @@ export function initHero({ reducedMotion }) {
     const tl = window.gsap.timeline({ delay: 0.22 });
     tl.to('.hero-established', { opacity: 1, y: 0, duration: 0.95, ease: 'power3.out' });
     tl.to('.hero-title-line span', { y: '0%', duration: 1.15, stagger: 0.12, ease: 'power4.out' }, '-=0.55');
-    tl.to('.hero-kicker, .hero-desc', { opacity: 1, duration: 0.95, ease: 'power2.out' }, '-=0.45');
+    tl.to('.hero-desc', { opacity: 1, duration: 0.95, ease: 'power2.out' }, '-=0.45');
     tl.to('.hero-cta', { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, '-=0.5');
 
     const heroInner = document.querySelector('.hero-inner');
@@ -64,7 +64,7 @@ export function initHero({ reducedMotion }) {
     }
   } else {
     // Reduced motion: force visible states
-    document.querySelectorAll('.hero-established,.hero-kicker,.hero-desc,.hero-cta').forEach((el) => el && (el.style.opacity = '1'));
+    document.querySelectorAll('.hero-established,.hero-desc,.hero-cta').forEach((el) => el && (el.style.opacity = '1'));
     document.querySelectorAll('.hero-title-line span').forEach((el) => (el.style.transform = 'translateY(0%)'));
   }
 
@@ -212,17 +212,19 @@ export function initHero({ reducedMotion }) {
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.max(1, Math.floor(window.innerWidth * dpr));
-    H = Math.max(1, Math.floor(window.innerHeight * dpr));
-    if (canvas.width !== W || canvas.height !== H) {
-      canvas.width = W;
-      canvas.height = H;
+    const nextW = Math.max(1, Math.floor(window.innerWidth * dpr));
+    const nextH = Math.max(1, Math.floor(window.innerHeight * dpr));
+    if (canvas.width !== nextW || canvas.height !== nextH) {
+      canvas.width = nextW;
+      canvas.height = nextH;
       canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = window.innerHeight + 'px';
+      W = nextW;
+      H = nextH;
+      cell = Math.max(8, Math.floor(10 * dpr));
+      cols = Math.ceil(W / cell);
+      rows = Math.ceil(H / cell);
     }
-    cell = Math.max(8, Math.floor(10 * dpr));
-    cols = Math.ceil(W / cell);
-    rows = Math.ceil(H / cell);
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
@@ -248,7 +250,6 @@ export function initHero({ reducedMotion }) {
 
   function draw(nowMs) {
     const t = nowMs * 0.001;
-    resize();
 
     ctx.clearRect(0, 0, W, H);
     ctx.textBaseline = 'top';

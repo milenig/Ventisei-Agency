@@ -1,6 +1,7 @@
 export function initGsap() {
   if (!window.gsap) {
-    throw new Error('GSAP not loaded. Ensure CDN scripts are included before scripts/main.js.');
+    console.warn('[Ventisei] GSAP not loaded; motion effects are disabled.');
+    return;
   }
   if (window.ScrollTrigger) window.gsap.registerPlugin(window.ScrollTrigger);
 
