@@ -6,17 +6,17 @@ export const METHOD_PROCESS_STEPS = [
   {
     id: '1',
     roman: 'i.',
-    title: 'Saslušavanje',
+    title: 'Upoznavanje',
     description:
-      'Čujemo kontekst, publiku i ograničenja: šta brend već nosi, šta treba da sazri i gde leži prostor za skok.',
+      'Važno nam je da upoznamo suštinu i karakter brenda na osnovu kog zajedno definišemo tržište, publiku, poziciju, ton komunikacije i ciljeve. Razumevanje konteksta nam daje pravac, a pravac sprečava da kreativna rešenja ostanu samo vizuelno dopadljiva.',
     visualIndex: 0,
   },
   {
     id: '2',
     roman: 'ii.',
-    title: 'Sistem',
+    title: 'Oblikovanje',
     description:
-      'Prevodimo ustanovljene ciljeve u jezik: tipografija, mreža, kanali, ton i jasna pravila — da sve „priča“ u istom glasu.',
+      'Identitet, sadržaj i način na koji brend komunicira oblikujemo sa ciljem da svaki element radi samostalno ali istovremeno i kao deo šire, kompaktne celine.',
     visualIndex: 1,
   },
   {
@@ -24,7 +24,7 @@ export const METHOD_PROCESS_STEPS = [
     roman: 'iii.',
     title: 'Isporuka',
     description:
-      'Objavljujemo brzo i uredno: fajlovi, rokovi, kampanje i podrška nakon lansiranja — da iskustvo ostane stabilno i merljivo.',
+      'Ideje pretvaramo u konkretne formate — kampanje, sadržaj, veb rešenja ili događaje. Fokus je na realizaciji koja je precizna, funkcionalna i merljiva — sa rezultatom koji se ne završava na prvom utisku.',
     visualIndex: 2,
   },
 ];
