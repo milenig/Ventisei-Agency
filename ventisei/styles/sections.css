@@ -707,7 +707,7 @@ body.is-mobile-nav-open {
 @media (min-width: 900px) {
   .hero-split {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(24px, 4vw, 56px);
     align-items: center;
   }
@@ -2188,8 +2188,8 @@ body.is-mobile-nav-open {
   }
 
   .hero-visual {
-    min-height: clamp(140px, 38vw, 200px);
-    max-height: 220px;
+    min-height: clamp(140px, 250vw, 250px);
+    max-height: 250px;
   }
 
   .hero-visual__stack {
