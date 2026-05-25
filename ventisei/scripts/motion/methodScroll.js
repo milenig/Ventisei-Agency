@@ -1,4 +1,4 @@
-import { METHOD_PROCESS_STEPS, METHOD_TEXT_PROGRESS_WINDOWS } from '../data/methodProcessSteps.js';
+import { getMethodProcessSteps, METHOD_TEXT_PROGRESS_WINDOWS } from '../data/methodProcessSteps.js';
 import {
   textWindowStyle,
   stepIndexInTextWindows,
@@ -10,7 +10,7 @@ const MQ_MOBILE_LAYOUT = '(max-width: 899px)';
 
 function hydrateStepsFromData(root) {
   const articles = Array.from(root.querySelectorAll('.methodProcess-step'));
-  METHOD_PROCESS_STEPS.forEach((step, i) => {
+  getMethodProcessSteps().forEach((step, i) => {
     const el = articles[i];
     if (!el) return;
     const roman = el.querySelector('.methodProcess-roman');
@@ -45,7 +45,7 @@ function buildMobileProcessStack(root) {
 
   stack.replaceChildren();
 
-  METHOD_PROCESS_STEPS.forEach((step, i) => {
+  getMethodProcessSteps().forEach((step, i) => {
     const idPrefix = `mm${i}`;
     const svg = cloneDiagramSvg(templateSvg, idPrefix);
     applyProcessVisualInstantToSvg(svg, step.visualIndex, idPrefix);
@@ -102,7 +102,7 @@ function teardownMobileShell(root) {
 }
 
 function runVisualPresence({ root, frame, targetIdx }) {
-  const step = METHOD_PROCESS_STEPS[targetIdx];
+  const step = getMethodProcessSteps()[targetIdx];
   if (!step) return null;
 
   if (!window.gsap) {
@@ -154,7 +154,7 @@ export function initMethodScroll({ reducedMotion, lenis = null } = {}) {
     let displayedVisualIndex = 0;
     let presenceTween = null;
 
-    morphProcessVisual(String(METHOD_PROCESS_STEPS[0].visualIndex + 1), { root, instant: true });
+    morphProcessVisual(String(getMethodProcessSteps()[0].visualIndex + 1), { root, instant: true });
 
     function applyFromProgress(p) {
       const clamped = Math.max(0, Math.min(1, p));
@@ -172,7 +172,7 @@ export function initMethodScroll({ reducedMotion, lenis = null } = {}) {
         root.dataset.activeStep = String((idx === null ? displayedVisualIndex : idx) + 1);
         if (idx !== null && idx !== displayedVisualIndex) {
           displayedVisualIndex = idx;
-          morphProcessVisual(String(METHOD_PROCESS_STEPS[idx].visualIndex + 1), { root, instant: true });
+          morphProcessVisual(String(getMethodProcessSteps()[idx].visualIndex + 1), { root, instant: true });
         }
         return;
       }

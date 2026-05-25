@@ -7,11 +7,21 @@ export function initMobileNav() {
   if (!rail || !toggle || !backdrop) return;
 
   const mq = window.matchMedia(MQ_MOBILE);
+  const isEn = (document.documentElement.lang || '').toLowerCase().startsWith('en');
 
   function setOpen(open) {
     rail.classList.toggle('is-nav-open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Zatvori meni' : 'Otvori meni');
+    toggle.setAttribute(
+      'aria-label',
+      open
+        ? isEn
+          ? 'Close menu'
+          : 'Zatvori meni'
+        : isEn
+          ? 'Open menu'
+          : 'Otvori meni'
+    );
     document.body.classList.toggle('is-mobile-nav-open', open);
     backdrop.hidden = !open;
     backdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
@@ -35,7 +45,7 @@ export function initMobileNav() {
     if (!e.matches) close();
   });
 
-  rail.querySelectorAll('.index-link').forEach((a) => {
+  rail.querySelectorAll('.index-link, .lang-switch__link').forEach((a) => {
     a.addEventListener('click', () => {
       if (mq.matches) close();
     });

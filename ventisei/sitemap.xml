@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ventisei.arch/</loc><changefreq>weekly</changefreq><priority>1</priority></url>
-  <url><loc>https://ventisei.arch/blog/zasto-ton-glasa.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ventisei.arch/blog/landing-stranica.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ventisei.arch/blog/dogadjaj-modul.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://ventisei.arch/</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ventisei.arch/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/en/</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ventisei.arch/en/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/blog/zasto-ton-glasa.html</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/blog/zasto-ton-glasa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ventisei.arch/en/blog/zasto-ton-glasa.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/en/blog/zasto-ton-glasa.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/blog/landing-stranica.html</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/blog/landing-stranica.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ventisei.arch/en/blog/landing-stranica.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/en/blog/landing-stranica.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/blog/dogadjaj-modul.html</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/blog/dogadjaj-modul.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ventisei.arch/en/blog/dogadjaj-modul.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ventisei.arch/en/blog/dogadjaj-modul.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

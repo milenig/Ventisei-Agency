@@ -12,11 +12,18 @@ export function initContactForm() {
     const email = String(fd.get('email') || '').trim();
     const company = String(fd.get('company') || '').trim();
     const message = String(fd.get('message') || '').trim();
-    const subject = encodeURIComponent(`Upit sa sajta — ${name || 'Ventisei'}`);
+    const isEn = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+    const subject = encodeURIComponent(
+      isEn ? `Inquiry from website — ${name || 'Ventisei'}` : `Upit sa sajta — ${name || 'Ventisei'}`
+    );
     const body = encodeURIComponent(
-      [`Ime: ${name}`, `E-pošta: ${email}`, company ? `Kompanija: ${company}` : '', '', message]
-        .filter(Boolean)
-        .join('\n')
+      isEn
+        ? [`Name: ${name}`, `Email: ${email}`, company ? `Company / brand: ${company}` : '', '', message]
+            .filter(Boolean)
+            .join('\n')
+        : [`Ime: ${name}`, `E-pošta: ${email}`, company ? `Kompanija: ${company}` : '', '', message]
+            .filter(Boolean)
+            .join('\n')
     );
     window.location.href = `mailto:hello@ventisei.arch?subject=${subject}&body=${body}`;
   });
