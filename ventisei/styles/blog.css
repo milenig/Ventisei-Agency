@@ -1,0 +1,128 @@
+/* Blog detail pages — layout with site rail + footer */
+
+.page-blog #main-content {
+  padding: clamp(100px, 12vw, 140px) var(--gutter) clamp(32px, 5vw, 48px);
+  padding-left: max(var(--gutter), calc(var(--gutter) + 148px));
+}
+
+@media (max-width: 899px) {
+  .page-blog #main-content {
+    padding-top: calc(var(--nav-h) + 28px);
+    padding-left: var(--gutter);
+  }
+}
+
+.blog-article {
+  max-width: var(--measure);
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.blog-article time {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.35em;
+}
+
+.blog-article h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 1.25em;
+  color: var(--ink);
+}
+
+.blog-article p {
+  margin: 0 0 1em;
+  color: rgba(10, 10, 10, 0.78);
+  font-size: clamp(15px, 1.05vw, 17px);
+}
+
+.blog-article p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-nav {
+  max-width: var(--measure);
+  margin: clamp(40px, 6vw, 64px) auto 0;
+  padding-top: clamp(24px, 3vw, 32px);
+  border-top: 1px solid var(--border);
+}
+
+.blog-post-nav__back {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(10, 10, 10, 0.66);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.blog-post-nav__back:hover {
+  color: var(--ink);
+}
+
+.blog-post-nav__adjacent {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 28px);
+}
+
+.blog-post-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(10, 10, 10, 0.55);
+  text-decoration: none;
+}
+
+.blog-post-nav__link--next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.blog-post-nav__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.blog-post-nav__title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.blog-post-nav__link:hover .blog-post-nav__title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-post-nav__slot--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (max-width: 599px) {
+  .blog-post-nav__adjacent {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-post-nav__link--next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+.page-blog .section-contactForm {
+  padding-top: clamp(64px, 10vw, 120px);
+}
