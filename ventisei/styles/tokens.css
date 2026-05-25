@@ -22,6 +22,8 @@
   --ease-heavy: cubic-bezier(0.77, 0, 0.175, 1);
 
   --gutter: clamp(20px, 4vw, 72px);
+  /* Keep full-bleed section rules from crossing the fixed index rail */
+  --rail-safe-left: max(var(--gutter), calc(var(--gutter) + 148px));
   --section-y: clamp(120px, 14vw, 220px);
   --section-y-lg: clamp(160px, 18vw, 280px);
   --grid-gap: 4px;

@@ -62,7 +62,7 @@
       <a class="index-link is-active" href="#about" data-section="about"><span class="index-num">01</span><span
           class="index-label">About</span></a>
       <a class="index-link" href="#works" data-section="works"><span class="index-num">02</span><span
-          class="index-label">Work</span></a>
+          class="index-label">Our Work</span></a>
       <a class="index-link" href="#method" data-section="method"><span class="index-num">03</span><span
           class="index-label">Process</span></a>
       <a class="index-link" href="#services" data-section="services"><span class="index-num">04</span><span
@@ -98,7 +98,7 @@
             <p class="hero-desc measure--narrow">
               We shape ideas, content, and experiences — building brands together.
             </p>
-            <a class="hero-cta" href="#contact">Send inquiry</a>
+            <a class="hero-cta" href="mailto:office.ventisei@gmail.com">Send inquiry</a>
           </div>
         </div>
 
@@ -107,6 +107,14 @@
             <div class="hero-visual__layer hero-visual__layer--base"></div>
             <div class="hero-visual__layer hero-visual__layer--metallic"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="hero-brands" aria-label="Our work and clients">
+        <div class="hero-brands__fade hero-brands__fade--left" aria-hidden="true"></div>
+        <div class="hero-brands__fade hero-brands__fade--right" aria-hidden="true"></div>
+        <div class="hero-brands__viewport">
+          <div class="hero-brands__track" id="hero-brands-marquee"></div>
         </div>
       </div>
     </div>
@@ -152,27 +160,11 @@
         <div class="section-head-top">
           <div class="section-eyebrow">
             <span class="section-index" aria-hidden="true">02</span>
-            <span class="section-label">Work</span>
+            <span class="section-label">Our Work</span>
           </div>
         </div>
-        <h2 class="section-title reveal-scrub">Projects</h2>
+        <h2 class="section-title reveal-scrub">Our Work</h2>
       </header>
-
-      <div class="works-tabs" role="tablist" aria-label="Project type">
-        <button class="filter-btn is-active" type="button" data-filter="sve" role="tab"
-          aria-selected="true">All</button>
-        <button class="filter-btn" type="button" data-filter="web" role="tab" aria-selected="false">Web design</button>
-        <button class="filter-btn" type="button" data-filter="brending" role="tab"
-          aria-selected="false">Branding</button>
-        <button class="filter-btn" type="button" data-filter="strategija" role="tab"
-          aria-selected="false">Strategy</button>
-        <button class="filter-btn" type="button" data-filter="oglasavanje" role="tab"
-          aria-selected="false">Advertising</button>
-        <button class="filter-btn" type="button" data-filter="dizajn" role="tab" aria-selected="false">Design</button>
-        <button class="filter-btn" type="button" data-filter="video" role="tab" aria-selected="false">Video</button>
-        <button class="filter-btn" type="button" data-filter="dogadaji" role="tab"
-          aria-selected="false">Events</button>
-      </div>
 
       <div class="archive-grid">
         <article class="archive-tile archive-tile--a" data-category="brending">
@@ -528,68 +520,23 @@
     </div>
   </section>
 
-  <section id="contact" class="section section-contactForm" data-nav-theme="dark">
-    <div class="container">
-      <header class="section-head section-head--editorial">
-        <div class="section-head-top">
-          <div class="section-eyebrow">
-            <span class="section-index" aria-hidden="true">07</span>
-            <span class="section-label">Contact</span>
-          </div>
-          <div class="section-meta micro-label">Reply within 48h</div>
-        </div>
-        <h2 class="section-title reveal-scrub">Let’s build together</h2>
-      </header>
-
-      <div class="contactForm-grid">
-        <div class="contactForm-copy">
-          <p class="contactForm-body measure">
-            Tell us what you are building and what must hold when the project is done. We will share next steps and a scope for the proposal.
-          </p>
-        </div>
-
-        <form class="contactForm" action="#" method="post" novalidate>
-          <label class="field">
-            <span class="field-label micro-label">Full name</span>
-            <input class="field-input" name="name" autocomplete="name" required>
-          </label>
-          <label class="field">
-            <span class="field-label micro-label">Email</span>
-            <input class="field-input" type="email" name="email" autocomplete="email" required>
-          </label>
-          <label class="field">
-            <span class="field-label micro-label">Company / brand</span>
-            <input class="field-input" name="company" autocomplete="organization">
-          </label>
-          <label class="field field--full">
-            <span class="field-label micro-label">Message</span>
-            <textarea class="field-input field-textarea" name="message" rows="5" required></textarea>
-          </label>
-
-          <button class="form-cta" type="submit">Send inquiry</button>
-        </form>
-      </div>
-    </div>
-  </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" id="contact" data-nav-theme="dark">
     <div class="container footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">Ventisei</div>
-        <p class="footer-tag">Precise brand · contemporary execution</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#about">About</a>
-        <a href="#works">Work</a>
-        <a href="#services">Services</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="footer-meta">
-        <span>© MMXXVI · Ventisei · All rights reserved</span>
-        <a href="mailto:office.ventisei@gmail.com">office.ventisei@gmail.com</a>
+      <div class="footer-bar">
+        <span class="footer-logo">Ventisei</span>
+        <span class="footer-bar__sep" aria-hidden="true">·</span>
+        <span class="footer-copy">© MMXXVI · Ventisei · All rights reserved</span>
+        <span class="footer-bar__sep" aria-hidden="true">·</span>
+        <a class="footer-email" href="mailto:office.ventisei@gmail.com">
+          <svg class="footer-email__icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="1.5" stroke="#01E6E1" stroke-width="1.75" />
+            <path d="M3 7.5 12 13.5 21 7.5" stroke="#01E6E1" stroke-width="1.75" stroke-linejoin="round" />
+          </svg>
+          office.ventisei@gmail.com
+        </a>
       </div>
     </div>
   </footer>
