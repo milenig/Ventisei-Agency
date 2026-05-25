@@ -635,15 +635,20 @@ body.is-mobile-nav-open {
   justify-content: center;
   width: clamp(112px, 14vw, 168px);
   height: clamp(40px, 5.5vw, 60px);
+  overflow: visible;
 }
 
 .hero-brands__logo {
+  --hero-logo-scale: 1;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
   pointer-events: none;
+  filter: grayscale(1);
+  opacity: 0.58;
+  transform: scale(var(--hero-logo-scale));
 }
 
 .hero-brands__logo--screen {

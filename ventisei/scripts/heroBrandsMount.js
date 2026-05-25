@@ -19,6 +19,7 @@ function buildBrandList({ base, isEn, ariaHidden }) {
     if (brand.screen) logoClass.push('hero-brands__logo--screen');
     if (brand.ink) logoClass.push('hero-brands__logo--ink');
     img.className = logoClass.join(' ');
+    if (brand.scale) img.style.setProperty('--hero-logo-scale', String(brand.scale));
     img.src = `${base}${brand.file}`;
     img.alt = ariaHidden ? '' : isEn ? brand.altEn : brand.altSr;
     img.width = 168;
