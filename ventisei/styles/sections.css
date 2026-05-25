@@ -2451,23 +2451,26 @@ body.is-mobile-nav-open {
   }
 
   .footer-bar {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 10px 12px;
-    font-size: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 11px;
     width: 100%;
   }
 
-  .footer-bar::-webkit-scrollbar {
+  .footer-bar__sep {
     display: none;
   }
 
-  .footer-logo,
-  .footer-copy,
+  .footer-logo {
+    order: 1;
+  }
+
   .footer-email {
-    flex-shrink: 0;
+    order: 2;
+  }
+
+  .footer-copy {
+    order: 3;
   }
 }
