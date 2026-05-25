@@ -127,3 +127,11 @@
 .page-blog .section-contactForm {
   padding-top: clamp(64px, 10vw, 120px);
 }
+
+@media (min-width: 900px) {
+  .page-blog .footer-inner.container {
+    max-width: none;
+    padding-left: var(--rail-safe-left);
+    padding-right: var(--gutter);
+  }
+}

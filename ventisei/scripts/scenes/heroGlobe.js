@@ -75,7 +75,7 @@ export function initHeroGlobe({ container, reducedMotion, pointerControl, isActi
     return el;
   });
 
-  const viewScale = 88;
+  const viewScale = 88 * 1.2;
   let rotX = 0.28;
   let rotY = 0;
   let velX = 0;
