@@ -63,6 +63,20 @@
     return toSerbianPath(path);
   }
 
+  function inferLangFromNavigation() {
+    try {
+      var ref = document.referrer;
+      if (!ref) return;
+      var refUrl = new URL(ref);
+      if (refUrl.origin !== window.location.origin) return;
+      var fromEn = isEnPath(refUrl.pathname);
+      var toEn = isEnPath(window.location.pathname);
+      if (fromEn !== toEn) saveLang(toEn ? 'en' : 'sr');
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
   function maybeRedirect() {
     var target = savedLang() || browserLang();
     var next = targetPath(target);
@@ -70,6 +84,7 @@
     window.location.replace(next + window.location.search + window.location.hash);
   }
 
+  inferLangFromNavigation();
   maybeRedirect();
 
   function onReady() {

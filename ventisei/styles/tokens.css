@@ -24,8 +24,8 @@
   --gutter: clamp(20px, 4vw, 72px);
   /* Keep full-bleed section rules from crossing the fixed index rail */
   --rail-safe-left: max(var(--gutter), calc(var(--gutter) + 148px));
-  --section-y: clamp(120px, 14vw, 220px);
-  --section-y-lg: clamp(160px, 18vw, 280px);
+  --section-y: clamp(72px, 9vw, 140px);
+  --section-y-lg: clamp(96px, 11vw, 180px);
   --grid-gap: 4px;
   --radius-0: 0px;
   --radius-card: 14px;
@@ -55,8 +55,8 @@
 @media (max-width: 899px) {
   :root {
     --gutter: clamp(14px, 4vw, 22px);
-    --section-y: clamp(56px, 10vw, 88px);
-    --section-y-lg: clamp(72px, 12vw, 110px);
+    --section-y: clamp(40px, 7vw, 64px);
+    --section-y-lg: clamp(48px, 8vw, 80px);
     --nav-h: 56px;
     --rail-x: 14px;
     --rail-y: 12px;

@@ -1,6 +1,9 @@
 import { loop } from '../webgl/core/loop.js';
 
 const MARQUEE_ID = 'hero-brands-marquee';
+const MQ_DESKTOP = '(min-width: 900px)';
+const SPEED_MOBILE = 0.85;
+const SPEED_DESKTOP = 1.55;
 
 export function initHeroBrandsMarquee({ reducedMotion }) {
   const track = document.getElementById(MARQUEE_ID);
@@ -15,8 +18,11 @@ export function initHeroBrandsMarquee({ reducedMotion }) {
     return;
   }
 
+  const mqDesktop = window.matchMedia?.(MQ_DESKTOP) ?? { matches: false, addEventListener: () => {} };
+  const resolveSpeed = () => (mqDesktop.matches ? SPEED_DESKTOP : SPEED_MOBILE);
+
   let pos = 0;
-  let speed = 0.45;
+  let speed = resolveSpeed();
   let halfWidth = 0;
 
   const measure = () => {
@@ -24,8 +30,14 @@ export function initHeroBrandsMarquee({ reducedMotion }) {
     if (halfWidth > 0 && pos <= -halfWidth) pos += halfWidth;
   };
 
+  const onLayoutChange = () => {
+    speed = resolveSpeed();
+    measure();
+  };
+
   measure();
-  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('resize', onLayoutChange, { passive: true });
+  mqDesktop.addEventListener?.('change', onLayoutChange);
 
   loop.subscribe(() => {
     if (halfWidth <= 0) {

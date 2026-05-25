@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./scripts/langDetect.js?v=2026-05-10"></script>
+  <script src="../scripts/langDetect.js?v=2026-05-10"></script>
   <title>Ventisei — Creative agency</title>
   <meta name="description"
     content="Ventisei: branding, strategy, design, digital, and events. Building a clear voice and consistent market presence.">
@@ -18,6 +18,11 @@
   <meta property="og:url" content="https://ventisei.arch/en/">
   <meta property="og:image" content="https://ventisei.arch/assets/og-image.png">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="sr_RS">
+  <meta property="og:site_name" content="Ventisei">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ventisei — We Are Ventisei">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ventisei — Creative agency">
   <meta name="twitter:description"
@@ -25,12 +30,13 @@
   <meta name="twitter:image" content="https://ventisei.arch/assets/og-image.png">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/og-image.png">
+  <link rel="manifest" href="../manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/tokens.css?v=2026-05-10">
   <link rel="stylesheet" href="../styles/base.css?v=2026-05-10">
-  <link rel="stylesheet" href="../styles/sections.css?v=2026-05-10">
+  <link rel="stylesheet" href="../styles/sections.css?v=2026-05-25">
   <link rel="alternate" hreflang="sr-Latn" href="https://ventisei.arch/">
   <link rel="alternate" hreflang="en" href="https://ventisei.arch/en/">
   <link rel="alternate" hreflang="x-default" href="https://ventisei.arch/">
@@ -38,8 +44,9 @@
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
-    {"@type":"Organization","name":"Ventisei","url":"https://ventisei.arch/","email":"office.ventisei@gmail.com","description":"Creative agency for branding, strategy, design, digital, and events.","logo":"https://ventisei.arch/assets/favicon.svg","areaServed":"RS","address":{"@type":"PostalAddress","addressLocality":"Kragujevac","addressCountry":"RS"}},
-    {"@type":"WebSite","name":"Ventisei","url":"https://ventisei.arch/","publisher":{"@type":"Organization","name":"Ventisei"}}
+    {"@type":"Organization","name":"Ventisei","url":"https://ventisei.arch/","email":"office.ventisei@gmail.com","description":"Creative agency for branding, strategy, design, digital, and events.","logo":"https://ventisei.arch/assets/favicon.svg","image":"https://ventisei.arch/assets/og-image.png","areaServed":"RS","address":{"@type":"PostalAddress","addressLocality":"Kragujevac","addressCountry":"RS"}},
+    {"@type":"WebSite","name":"Ventisei","url":"https://ventisei.arch/","inLanguage":["sr-Latn","en"],"publisher":{"@type":"Organization","name":"Ventisei"}},
+    {"@type":"ProfessionalService","name":"Ventisei","url":"https://ventisei.arch/","image":"https://ventisei.arch/assets/og-image.png","description":"Creative agency for branding, strategy, design, digital, and events.","email":"office.ventisei@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Kragujevac","addressCountry":"RS"},"areaServed":"RS"}
   ]}
   </script>
 </head>
@@ -68,7 +75,7 @@
       <a class="index-link" href="#services" data-section="services"><span class="index-num">04</span><span
           class="index-label">Services</span></a>
       <a class="index-link" href="#testimonials" data-section="testimonials"><span class="index-num">05</span><span
-          class="index-label">Testimonials</span></a>
+          class="index-label">Who</span></a>
       <a class="index-link" href="#blog" data-section="blog"><span class="index-num">06</span><span
           class="index-label">Blog</span></a>
       <a class="index-link" href="#contact" data-section="contact"><span class="index-num">07</span><span
@@ -91,8 +98,8 @@
           <div class="hero-established">Ventisei · Kragujevac</div>
 
           <div class="hero-stack">
-            <h1 class="hero-title" aria-label="BRANDS &amp; PEOPLE">
-              <span class="hero-title-line"><span>BRANDS &amp; PEOPLE</span></span>
+            <h1 class="hero-title" aria-label="WE ARE VENTISEI">
+              <span class="hero-title-line"><span>WE ARE VENTISEI</span></span>
             </h1>
 
             <p class="hero-desc measure--narrow">
@@ -441,28 +448,26 @@
         <div class="section-head-top">
           <div class="section-eyebrow">
             <span class="section-index" aria-hidden="true">05</span>
-            <span class="section-label">Testimonials</span>
+            <span class="section-label">Who</span>
           </div>
-          <div class="section-meta micro-label">Selected references</div>
+          <div class="section-meta micro-label">Brands&nbsp;·&nbsp;People&nbsp;·&nbsp;In between</div>
         </div>
-        <h2 class="section-title reveal-scrub">Recommendations</h2>
+        <h2 class="section-title reveal-scrub">Who we work with</h2>
       </header>
 
-      <div class="testimonials-grid">
-        <figure class="testimonial reveal-up">
-          <blockquote>“We finally have a brand that sounds the same in every touchpoint — from the site to ads.”</blockquote>
-          <figcaption><span class="t-name">Marketing director</span><span class="t-role">— retail brand</span>
-          </figcaption>
-        </figure>
-        <figure class="testimonial reveal-up">
-          <blockquote>“They understood us quickly, and delivery was clear — no chaos between deadlines.”</blockquote>
-          <figcaption><span class="t-name">Founder</span><span class="t-role">— tech startup</span></figcaption>
-        </figure>
-        <figure class="testimonial reveal-up">
-          <blockquote>“They didn’t just polish things — they built a system our team actually uses.”</blockquote>
-          <figcaption><span class="t-name">Product manager</span><span class="t-role">— B2B company</span>
-          </figcaption>
-        </figure>
+      <div class="audience-grid">
+        <article class="audience-card reveal-up">
+          <h3 class="audience-card__title">Brands</h3>
+          <p class="audience-card__desc">Companies that need a clearer voice and a system behind it — identity, campaigns, content, and touchpoints that sound and look like one brand, not a pile of assets.</p>
+        </article>
+        <article class="audience-card reveal-up">
+          <h3 class="audience-card__title">People</h3>
+          <p class="audience-card__desc">Creators, founders, and public figures building a presence that feels personal — how you show up online, on stage, and in conversation, with direction that still sounds like you.</p>
+        </article>
+        <article class="audience-card reveal-up">
+          <h3 class="audience-card__title">Everything in between</h3>
+          <p class="audience-card__desc">Launches, events, partnerships, and moments where brand and audience meet — we shape the story, assets, and rollout so the in-between feels intentional, not improvised.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -545,7 +550,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-  <script type="module" src="../scripts/main.js?v=2026-05-10"></script>
+  <script type="module" src="../scripts/main.js?v=2026-05-25"></script>
 </body>
 
 </html>

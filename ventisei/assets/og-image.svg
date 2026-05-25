@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ventisei — We Are Ventisei">
+  <defs>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#99F5F3" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#99F5F3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <circle cx="980" cy="120" r="280" fill="url(#glow)"/>
+  <circle cx="180" cy="520" r="220" fill="url(#glow)"/>
+  <g transform="translate(96, 96)">
+    <rect width="72" height="72" rx="18" fill="#111"/>
+    <path d="M22 54 36 24l14 30" fill="none" stroke="#99F5F3" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="96" y="260" fill="#ffffff" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="88" font-weight="700" letter-spacing="-2">Ventisei</text>
+  <text x="96" y="340" fill="#99F5F3" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="34" font-weight="600" letter-spacing="6">WE ARE VENTISEI</text>
+  <text x="96" y="410" fill="#a3a3a3" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" font-weight="400">Creative agency · Kragujevac</text>
+  <text x="96" y="540" fill="#525252" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="22" font-weight="500">ventisei.arch</text>
+</svg>

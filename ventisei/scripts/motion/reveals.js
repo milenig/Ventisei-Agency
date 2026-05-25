@@ -39,7 +39,7 @@ function wrapAboutLeadWords(paragraph) {
 
 export function initReveals({ reducedMotion }) {
   const motionEls =
-    '.reveal-up, .archive-tile, .service-block, .method-col, .testimonial, .blog-card';
+    '.reveal-up, .archive-tile, .service-block, .method-col, .audience-card, .blog-card';
 
   if (reducedMotion || !window.gsap || !window.ScrollTrigger) {
     document

@@ -1,9 +1,76 @@
 import { initRailTheme } from './railTheme.js';
 
+const MQ_DESKTOP = '(min-width: 900px)';
+
+function initRailHoverMarker(railLinks) {
+  const linksWrap = document.querySelector('.index-links');
+  if (!linksWrap || !railLinks.length) return;
+
+  const mqDesktop = window.matchMedia(MQ_DESKTOP);
+  let marker = linksWrap.querySelector('.index-rail-marker');
+  if (!marker) {
+    marker = document.createElement('span');
+    marker.className = 'index-rail-marker';
+    marker.setAttribute('aria-hidden', 'true');
+    linksWrap.prepend(marker);
+  }
+
+  let isHovering = false;
+
+  function placeMarkerOnLink(link) {
+    if (!mqDesktop.matches || !link) return;
+    const y = link.offsetTop + link.offsetHeight / 2;
+    marker.style.transform = `translate3d(0, ${y}px, 0) translateY(-50%)`;
+    marker.classList.add('is-visible');
+  }
+
+  function snapMarkerToActive() {
+    if (!mqDesktop.matches) {
+      marker.classList.remove('is-visible');
+      return;
+    }
+    const active = railLinks.find((a) => a.classList.contains('is-active'));
+    if (active) placeMarkerOnLink(active);
+    else marker.classList.remove('is-visible');
+  }
+
+  railLinks.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      if (!mqDesktop.matches) return;
+      isHovering = true;
+      linksWrap.classList.add('is-rail-hover');
+      placeMarkerOnLink(link);
+    });
+  });
+
+  linksWrap.addEventListener('mouseleave', () => {
+    if (!mqDesktop.matches) return;
+    isHovering = false;
+    linksWrap.classList.remove('is-rail-hover');
+    snapMarkerToActive();
+  });
+
+  mqDesktop.addEventListener('change', () => {
+    isHovering = false;
+    linksWrap.classList.remove('is-rail-hover');
+    snapMarkerToActive();
+  });
+
+  window.addEventListener('resize', () => {
+    if (!mqDesktop.matches) return;
+    if (isHovering) return;
+    snapMarkerToActive();
+  }, { passive: true });
+
+  return { snapMarkerToActive, isHovering: () => isHovering };
+}
+
 export function initSideMarkers({ scroller }) {
   const railLinks = Array.from(document.querySelectorAll('.index-link'));
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
   if (!railLinks.length && !navLinks.length) return;
+
+  const railMarker = initRailHoverMarker(railLinks);
 
   const railSectionIds = railLinks
     .map((a) => a.getAttribute('data-section') || '')
@@ -40,6 +107,9 @@ export function initSideMarkers({ scroller }) {
       navLinks.forEach((a) => {
         a.classList.toggle('active', (a.getAttribute('href') || '') === `#${sectionId}`);
       });
+      if (railMarker && !railMarker.isHovering()) {
+        railMarker.snapMarkerToActive();
+      }
     }
   }
 
@@ -103,4 +173,7 @@ export function initSideMarkers({ scroller }) {
     window.addEventListener('scrollend', tick, { passive: true });
   }
   tick();
+  if (railMarker) {
+    window.requestAnimationFrame(() => railMarker.snapMarkerToActive());
+  }
 }
