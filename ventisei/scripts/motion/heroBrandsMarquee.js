@@ -2,8 +2,8 @@ import { loop } from '../webgl/core/loop.js';
 
 const MARQUEE_ID = 'hero-brands-marquee';
 const MQ_DESKTOP = '(min-width: 900px)';
-const SPEED_MOBILE = 0.85;
-const SPEED_DESKTOP = 1.55;
+const SPEED_MOBILE = 0.72;
+const SPEED_DESKTOP = 1.32;
 
 export function initHeroBrandsMarquee({ reducedMotion }) {
   const track = document.getElementById(MARQUEE_ID);
