@@ -25,6 +25,6 @@ export function initContactForm() {
             .filter(Boolean)
             .join('\n')
     );
-    window.location.href = `mailto:hello@ventisei.arch?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:office.ventisei@gmail.com?subject=${subject}&body=${body}`;
   });
 }
