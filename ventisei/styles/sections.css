@@ -2362,17 +2362,20 @@ body.is-mobile-nav-open {
   }
 
   .hero-visual {
-    min-height: clamp(140px, 250vw, 250px);
-    max-height: 250px;
+    min-height: 0;
+    max-height: none;
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
   }
 
   .hero-visual__stack {
     will-change: auto;
-    inset: 0 auto 0 0;
-    width: auto;
+    inset: 0;
+    width: 100%;
     height: 100%;
-    aspect-ratio: 1;
-    max-width: 100%;
+    aspect-ratio: unset;
+    max-width: none;
   }
 
   /* Process: desktop scroll room hidden; mobile stack shown via JS class */
