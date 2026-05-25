@@ -611,18 +611,19 @@ body.is-mobile-nav-open {
   outline-offset: 3px;
 }
 
-/* Hero — client logos marquee (left → right), within content width */
+/* Client logos marquee */
 .hero-brands {
   position: relative;
   width: 100%;
   max-width: 100%;
   margin-left: 0;
-  margin-top: clamp(28px, 4.5vw, 52px);
   padding: clamp(18px, 2.8vw, 28px) 0;
-  border-top: 1px solid var(--border);
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(12px);
+}
+
+.section-archive .hero-brands {
+  margin-top: clamp(36px, 5vw, 64px);
+  border-top: 1px solid var(--border);
 }
 
 .hero-brands__fade {
@@ -2361,8 +2362,8 @@ body.is-mobile-nav-open {
     opacity: 0.26;
   }
 
-  .hero-brands {
-    margin-top: clamp(16px, 3.5vw, 28px);
+  .section-archive .hero-brands {
+    margin-top: clamp(24px, 4vw, 40px);
     padding: clamp(12px, 2vw, 20px) 0;
   }
 

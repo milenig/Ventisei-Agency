@@ -13,8 +13,9 @@ export const HERO_BRANDS = [
     altSr: 'Lusso Lighting',
     altEn: 'Lusso Lighting',
     screen: false,
+    ink: true,
     width: 240,
-    scale: 1.0,
+    scale: 1.42,
   },
   {
     file: 'club-101.png',
@@ -22,7 +23,7 @@ export const HERO_BRANDS = [
     altEn: '101',
     screen: false,
     width: 200,
-    scale: 1.05,
+    scale: 1.45,
   },
   {
     file: 'gromcast.png',
@@ -30,7 +31,7 @@ export const HERO_BRANDS = [
     altEn: 'Grom Cast',
     screen: false,
     width: 240,
-    scale: 1.78,
+    scale: 2.1,
   },
   {
     file: 'projects.png',
@@ -47,7 +48,7 @@ export const HERO_BRANDS = [
     screen: false,
     ink: true,
     width: 200,
-    scale: 1.15,
+    scale: 1.6,
   },
   {
     file: 'vibe-festival.png',
@@ -78,6 +79,7 @@ export const HERO_BRANDS = [
     altSr: 'Compass Festival',
     altEn: 'Compass Festival',
     screen: false,
+    ink: true,
     width: 240,
     scale: 1.68,
   },

@@ -16,7 +16,6 @@ export function initHero({ reducedMotion }) {
     tl.to('.hero-title-line span', { y: '0%', duration: 1.15, stagger: 0.12, ease: 'power4.out' }, '-=0.55');
     tl.to('.hero-desc', { opacity: 1, duration: 0.95, ease: 'power2.out' }, '-=0.45');
     tl.to('.hero-cta', { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' }, '-=0.5');
-    tl.to('.hero-brands', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.35');
 
     const heroInner = document.querySelector('.hero-inner');
     const heroSection = document.getElementById('hero');
@@ -57,9 +56,7 @@ export function initHero({ reducedMotion }) {
     }
   } else {
     // Reduced motion: force visible states
-    document.querySelectorAll('.hero-established,.hero-desc,.hero-cta,.hero-brands').forEach((el) => el && (el.style.opacity = '1'));
-    const heroBrands = document.querySelector('.hero-brands');
-    if (heroBrands) heroBrands.style.transform = 'none';
+    document.querySelectorAll('.hero-established,.hero-desc,.hero-cta').forEach((el) => el && (el.style.opacity = '1'));
     document.querySelectorAll('.hero-title-line span').forEach((el) => (el.style.transform = 'translateY(0%)'));
   }
 
