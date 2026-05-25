@@ -1,27 +1,19 @@
+import { initRailTheme } from './railTheme.js';
+
 export function initSideMarkers({ scroller }) {
   const railLinks = Array.from(document.querySelectorAll('.index-link'));
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
-  const rail = document.querySelector('.index-rail');
-  const nav = document.getElementById('main-nav');
   if (!railLinks.length && !navLinks.length) return;
 
   const railSectionIds = railLinks
     .map((a) => a.getAttribute('data-section') || '')
     .filter(Boolean);
 
-  const darkSectionIds = ['services', 'contact'];
-  const darkSectionEls = darkSectionIds
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
-
   const els = railSectionIds
     .map((id) => document.getElementById(id))
     .filter(Boolean);
 
-  const applyRailTheme = (onDark) => {
-    if (!rail) return;
-    rail.classList.toggle('is-on-dark', onDark);
-  };
+  initRailTheme({ scroller });
 
   /** Scrollspy: last section whose top crossed the activation line. */
   function getActiveSectionId() {
@@ -34,46 +26,6 @@ export function initSideMarkers({ scroller }) {
       if (top <= lineY) activeId = el.id;
     }
     return activeId;
-  }
-
-  /**
-   * Theme from viewport overlap (not scrollspy id): avoids snapping when spy says "about"
-   * while the user still sees a dark band (e.g. leaving Services).
-   * Hysteresis: higher bar to enter dark, lower bar to leave — reduces flicker at edges.
-   */
-  function overlapRatioInReadingBand() {
-    const vh = window.innerHeight || 1;
-    const bandTop = vh * 0.28;
-    const bandBottom = vh * 0.72;
-    const bandH = Math.max(1, bandBottom - bandTop);
-    let maxPx = 0;
-    for (let i = 0; i < darkSectionEls.length; i += 1) {
-      const el = darkSectionEls[i];
-      const r = el.getBoundingClientRect();
-      const overlap = Math.max(
-        0,
-        Math.min(r.bottom, bandBottom) - Math.max(r.top, bandTop)
-      );
-      maxPx = Math.max(maxPx, overlap);
-    }
-    return maxPx / bandH;
-  }
-
-  let committedDark = false;
-
-  function updateThemeFromViewport() {
-    const ratio = overlapRatioInReadingBand();
-    let next = committedDark;
-    if (committedDark) {
-      if (ratio < 0.055) next = false;
-    } else if (ratio > 0.14) {
-      next = true;
-    }
-    if (next !== committedDark) {
-      committedDark = next;
-      applyRailTheme(committedDark);
-      if (nav) nav.classList.toggle('is-on-dark', committedDark);
-    }
   }
 
   let lastActiveId = '';
@@ -97,7 +49,6 @@ export function initSideMarkers({ scroller }) {
     rafId = 0;
     const sectionId = getActiveSectionId();
     updateActiveLinks(sectionId);
-    updateThemeFromViewport();
   }
 
   function scheduleTick() {

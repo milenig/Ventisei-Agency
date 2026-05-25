@@ -1,7 +1,8 @@
 /* Blog detail pages — layout with site rail + footer */
 
+/* Align article start with .index-rail-brand (top 26px + rail padding 10px) */
 .page-blog #main-content {
-  padding: clamp(100px, 12vw, 140px) var(--gutter) clamp(32px, 5vw, 48px);
+  padding: 36px var(--gutter) clamp(32px, 5vw, 48px);
   padding-left: max(var(--gutter), calc(var(--gutter) + 148px));
 }
 
