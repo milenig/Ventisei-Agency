@@ -2361,6 +2361,20 @@ body.is-mobile-nav-open {
     opacity: 0.26;
   }
 
+  .hero-brands {
+    margin-top: clamp(16px, 3.5vw, 28px);
+    padding: clamp(12px, 2vw, 20px) 0;
+  }
+
+  .hero-brands__list {
+    gap: clamp(10px, 2.2vw, 16px);
+    padding: 0 clamp(10px, 2.2vw, 16px);
+  }
+
+  .hero-brands__track--static {
+    row-gap: clamp(10px, 2.5vw, 16px);
+  }
+
   .hero-visual {
     min-height: 0;
     max-height: none;
