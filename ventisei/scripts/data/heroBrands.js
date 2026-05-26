@@ -15,7 +15,7 @@ export const HERO_BRANDS = [
     screen: false,
     ink: true,
     width: 280,
-    scale: 1.68,
+    scale: 2.05,
   },
   {
     file: 'club-101.png',

@@ -10,7 +10,7 @@ const MAX_VEL = 1.35;
 const POINTER_RANGE = 0.42;
 const VEL_SMOOTH = 5.5;
 const IDLE_SPIN_Y = 0.12;
-const GLOW_CYAN = '26, 107, 92';
+const GLOW_CYAN = '1, 230, 225';
 const GLOW_DOT_RADIUS = 0.32;
 const VIEWBOX_HALF = 120;
 
