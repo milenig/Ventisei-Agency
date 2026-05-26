@@ -1,6 +1,14 @@
 /** Hero marquee client logos — single source of truth */
 export const HERO_BRANDS = [
   {
+    file: 'redbull.png',
+    altSr: 'Red Bull',
+    altEn: 'Red Bull',
+    screen: false,
+    width: 286,
+    scale: 0.88,
+  },
+  {
     file: 'czk-smederevo.png',
     altSr: 'Muzički centar Crne Gore',
     altEn: 'Montenegro Music Center',

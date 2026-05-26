@@ -5,6 +5,12 @@ function brandsAssetBase() {
   return path.includes('/en/') ? '../assets/brands/' : 'assets/brands/';
 }
 
+const HERO_LOGO_SCALE_MAX = Math.max(...HERO_BRANDS.map((brand) => brand.scale ?? 1));
+
+function normalizedLogoScale(scale) {
+  return (scale ?? 1) / HERO_LOGO_SCALE_MAX;
+}
+
 function buildBrandList({ base, isEn, ariaHidden }) {
   const ul = document.createElement('ul');
   ul.className = 'hero-brands__list';
@@ -13,7 +19,7 @@ function buildBrandList({ base, isEn, ariaHidden }) {
   HERO_BRANDS.forEach((brand) => {
     const li = document.createElement('li');
     li.className = 'hero-brands__item';
-    li.style.setProperty('--hero-logo-scale', String(brand.scale ?? 1));
+    li.style.setProperty('--hero-logo-scale', String(normalizedLogoScale(brand.scale)));
 
     const img = document.createElement('img');
     const logoClass = ['hero-brands__logo'];

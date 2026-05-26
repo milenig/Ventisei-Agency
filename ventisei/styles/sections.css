@@ -705,6 +705,8 @@ body.is-mobile-nav-open {
 
 .hero-brands__track {
   display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 44px);
   width: max-content;
   will-change: transform;
 }
@@ -726,7 +728,7 @@ body.is-mobile-nav-open {
   align-items: center;
   flex-shrink: 0;
   gap: clamp(18px, 3vw, 44px);
-  padding: 0 clamp(18px, 3vw, 44px);
+  padding: 0;
   margin: 0;
   list-style: none;
 }
@@ -736,14 +738,14 @@ body.is-mobile-nav-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(clamp(112px, 14vw, 148px) * var(--hero-logo-scale, 1));
-  height: calc(clamp(42px, 5.8vw, 56px) * var(--hero-logo-scale, 1));
+  width: clamp(224px, 28vw, 296px);
+  height: clamp(84px, 11.6vw, 112px);
 }
 
 .hero-brands__logo {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% * var(--hero-logo-scale, 1));
+  height: calc(100% * var(--hero-logo-scale, 1));
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -1929,6 +1931,12 @@ body.is-mobile-nav-open {
   padding: var(--section-y-lg) 0;
   background: var(--bg);
 }
+
+.section-testimonials .section-head--editorial .section-meta {
+  max-width: none;
+  white-space: nowrap;
+}
+
 .section-testimonials .section-title {
   color: #000000;
 }
@@ -2462,9 +2470,12 @@ body.is-mobile-nav-open {
     padding: clamp(12px, 2vw, 20px) 0;
   }
 
+  .hero-brands__track {
+    gap: clamp(10px, 2.2vw, 16px);
+  }
+
   .hero-brands__list {
     gap: clamp(10px, 2.2vw, 16px);
-    padding: 0 clamp(10px, 2.2vw, 16px);
   }
 
   .hero-brands__track--static {
