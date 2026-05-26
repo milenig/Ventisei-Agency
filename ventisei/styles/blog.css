@@ -1,15 +1,44 @@
 /* Blog detail pages — layout with site rail + footer */
 
-/* Align article start with .index-rail-brand (top 26px + rail padding 10px) */
+/* Desktop: stretch main so footer sits on the bottom of the viewport when content is short */
+@media (min-width: 900px) {
+  .page-blog {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .page-blog #main-content {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: var(--container);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .page-blog .footer {
+    flex-shrink: 0;
+    width: 100%;
+  }
+}
+
+/* Same content column as homepage .container (centered, symmetric gutters) */
 .page-blog #main-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
   padding: 36px var(--gutter) clamp(32px, 5vw, 48px);
-  padding-left: var(--rail-safe-left);
 }
 
 @media (max-width: 899px) {
   .page-blog #main-content {
     padding-top: calc(var(--nav-h) + 28px);
-    padding-left: var(--gutter);
   }
 }
 
@@ -126,12 +155,4 @@
 
 .page-blog .section-contactForm {
   padding-top: clamp(64px, 10vw, 120px);
-}
-
-@media (min-width: 900px) {
-  .page-blog .footer-inner.container {
-    max-width: none;
-    padding-left: var(--rail-safe-left);
-    padding-right: var(--gutter);
-  }
 }

@@ -505,12 +505,22 @@ body.is-mobile-nav-open {
 .hero-visual__stack {
   position: absolute;
   inset: 0;
-  will-change: transform;
+  will-change: transform, clip-path;
+}
+
+.hero-visual__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity, background, clip-path;
 }
 
 .hero-globe {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   display: block;
@@ -522,12 +532,49 @@ body.is-mobile-nav-open {
   fill: var(--ink, #0a0a0a);
 }
 
-.hero-visual::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+@media (hover: hover) and (pointer: fine) {
+  .hero-visual {
+    cursor: none;
+  }
+}
+
+.hero-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10001;
   pointer-events: none;
-  z-index: 1;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.hero-cursor__ring,
+.hero-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.hero-cursor__ring {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink, #0a0a0a);
+  transition: transform 0.28s var(--ease-arch);
+}
+
+.hero-cursor__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink, #0a0a0a);
+  transition: transform 0.28s var(--ease-arch);
+}
+
+.hero-cursor.is-active .hero-cursor__ring,
+.hero-cursor.is-active .hero-cursor__dot {
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 .hero-established {
@@ -993,6 +1040,11 @@ body.is-mobile-nav-open {
   border-radius: var(--radius-card);
   filter: grayscale(1);
   transition: filter 0.4s ease;
+}
+
+/* Portrait frame: building sits low-right; default center crop hides it in square tiles */
+.archive-photo--industrial-legacy {
+  object-position: 62% 72%;
 }
 
 .archive-tile:hover .archive-photo {
@@ -2018,7 +2070,7 @@ body.is-mobile-nav-open {
 @media (min-width: 900px) {
   .footer-bar {
     display: grid;
-    grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: clamp(16px, 2vw, 32px);
   }

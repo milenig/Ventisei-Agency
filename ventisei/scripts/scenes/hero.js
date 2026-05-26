@@ -61,7 +61,6 @@ export function initHero({ reducedMotion }) {
   }
 
   const heroVisual = document.querySelector('.hero-visual');
-  const heroSectionEl = document.getElementById('hero');
   const finePointer =
     typeof window.matchMedia === 'function' &&
     window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -79,7 +78,8 @@ export function initHero({ reducedMotion }) {
     heroGlobeIo.observe(heroVisual);
 
     initHeroGlobe({
-      container: heroSectionEl ?? heroVisual,
+      container: heroVisual,
+      glowEl: heroVisual,
       reducedMotion,
       pointerControl: finePointer && !isMobileLayout(),
       isActive: () => heroGlobeActive,

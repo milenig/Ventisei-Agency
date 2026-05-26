@@ -14,8 +14,8 @@ export const HERO_BRANDS = [
     altEn: 'Lusso Lighting',
     screen: false,
     ink: true,
-    width: 240,
-    scale: 1.42,
+    width: 280,
+    scale: 1.68,
   },
   {
     file: 'club-101.png',
