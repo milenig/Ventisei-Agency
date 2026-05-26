@@ -65,12 +65,12 @@
 }
 
 .blog-article-hero {
+  width: 100%;
   margin: 0 0 clamp(24px, 4vw, 36px);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   overflow: hidden;
-  aspect-ratio: 16 / 10;
-  max-height: min(360px, 55vw);
+  aspect-ratio: 16 / 9;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.03);
 }
 
