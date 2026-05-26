@@ -1042,9 +1042,22 @@ body.is-mobile-nav-open {
   transition: filter 0.4s ease;
 }
 
-/* Portrait frame: building sits low-right; default center crop hides it in square tiles */
+.archive-photo--mina-plus {
+  transform: scale(1.14);
+  transform-origin: center;
+}
+
+.archive-photo--101 {
+  object-position: center 58%;
+  transform: scale(1.16);
+  transform-origin: center 58%;
+}
+
+/* Portrait frame: building sits low-right; anchor crop on the structure */
 .archive-photo--industrial-legacy {
-  object-position: 62% 72%;
+  object-position: 90% 100%;
+  transform: scale(1.48);
+  transform-origin: 90% 100%;
 }
 
 .archive-tile:hover .archive-photo {

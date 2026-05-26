@@ -23,7 +23,7 @@ export const HERO_BRANDS = [
     altEn: '101',
     screen: false,
     width: 200,
-    scale: 1.45,
+    scale: 1.75,
   },
   {
     file: 'gromcast.png',
@@ -39,7 +39,7 @@ export const HERO_BRANDS = [
     altEn: 'Mina Plus',
     screen: false,
     width: 240,
-    scale: 0.82,
+    scale: 1.22,
   },
   {
     file: 'industrial-legacy.png',
@@ -48,7 +48,7 @@ export const HERO_BRANDS = [
     screen: false,
     ink: true,
     width: 200,
-    scale: 1.6,
+    scale: 1.92,
   },
   {
     file: 'vibe-festival.png',
@@ -64,7 +64,7 @@ export const HERO_BRANDS = [
     altEn: 'Citadela Construction',
     screen: false,
     width: 240,
-    scale: 1.12,
+    scale: 1.5,
   },
   {
     file: 'art-tim.png',
@@ -72,7 +72,7 @@ export const HERO_BRANDS = [
     altEn: 'Art-Tim',
     screen: false,
     width: 240,
-    scale: 0.78,
+    scale: 1.28,
   },
   {
     file: 'compass-festival.png',

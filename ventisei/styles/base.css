@@ -12,7 +12,6 @@ body {
   cursor: auto;
   -webkit-font-smoothing: antialiased;
 }
-/*code*/
 
 /* Avoid horizontal scroll when using rotated rail */
 body { overflow-x: clip; }
