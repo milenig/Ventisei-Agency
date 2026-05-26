@@ -35,7 +35,7 @@ export const METHOD_PROCESS_STEPS_EN = [
     roman: 'i.',
     title: 'Discovery',
     description:
-      'We start by understanding the brand’s essence and character — together we define the market, audience, positioning, tone of voice, and goals. Context gives direction; direction keeps creative work from staying merely visually pleasing.',
+      'It matters that we understand the brand’s essence and character — together we define the market, audience, positioning, communication tone, and goals. Context gives direction; direction keeps creative solutions from staying merely visually pleasing.',
     visualIndex: 0,
   },
   {
@@ -43,7 +43,7 @@ export const METHOD_PROCESS_STEPS_EN = [
     roman: 'ii.',
     title: 'Shaping',
     description:
-      'We shape identity, content, and how the brand communicates so every element works on its own and as part of a wider, coherent whole.',
+      'We shape identity, content, and how the brand communicates so every element works on its own and as part of a wider, compact whole.',
     visualIndex: 1,
   },
   {
@@ -51,7 +51,7 @@ export const METHOD_PROCESS_STEPS_EN = [
     roman: 'iii.',
     title: 'Delivery',
     description:
-      'We turn ideas into concrete formats — campaigns, content, web, or events. The focus is precise, functional, measurable execution — with outcomes that go beyond a first impression.',
+      'We turn ideas into concrete formats — campaigns, content, web solutions, or events. The focus is execution that is precise, functional, and measurable — with results that do not end at the first impression.',
     visualIndex: 2,
   },
 ];
