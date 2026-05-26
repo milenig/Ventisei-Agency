@@ -22,6 +22,7 @@ a { color: inherit; }
 @media (pointer: coarse) {
   body { cursor: auto; }
 }
+/* END OF body */
 
 /* Noise overlay */
 body::after {
