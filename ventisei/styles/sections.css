@@ -18,16 +18,11 @@
   max-width: var(--container);
 }
 
-/* Desktop: offset content from fixed left rail; narrow column on smaller viewports */
+/* Desktop: offset content from fixed left rail (see .feature-sticky-container below) */
 @media (min-width: 900px) {
   .container,
   .container--wide {
     padding-left: var(--rail-safe-left);
-    padding-right: var(--gutter);
-  }
-
-  .feature-sticky-container {
-    padding-left: max(var(--rail-safe-left), clamp(92px, 10vh, 140px));
     padding-right: var(--gutter);
   }
 }
@@ -1686,8 +1681,41 @@ body.is-mobile-nav-open {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: clamp(92px, 10vh, 140px) var(--gutter);
+  padding-top: clamp(92px, 10vh, 140px);
+  padding-bottom: clamp(92px, 10vh, 140px);
+  padding-right: var(--gutter);
+  padding-left: var(--gutter);
   overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .feature-sticky-container {
+    padding-left: var(--rail-safe-left);
+    padding-right: var(--gutter);
+  }
+
+  .feature-sticky-inner {
+    width: 100%;
+    max-width: min(var(--container), calc(100vw - var(--rail-safe-left) - var(--gutter)));
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .feature-sticky-inner {
+    grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.32fr);
+    gap: clamp(18px, 2.5vw, 36px);
+  }
+
+  .section-services .section-title {
+    font-size: clamp(24px, 2.6vw, 34px);
+    max-width: 14ch;
+  }
+
+  .service-card {
+    flex: 0 0 clamp(260px, 32vw, 320px);
+    min-height: clamp(300px, 40vh, 380px);
+  }
 }
 
 .feature-sticky-inner {
@@ -1695,9 +1723,10 @@ body.is-mobile-nav-open {
   max-width: var(--container);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
   gap: clamp(28px, 4vw, 72px);
   align-items: center;
+  min-width: 0;
 }
 
 .feature-header {
@@ -1732,6 +1761,7 @@ body.is-mobile-nav-open {
   position: relative;
   overflow: hidden;
   width: 100%;
+  min-width: 0;
 }
 
 .services-horizontal { display: contents; }
