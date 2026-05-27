@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../scripts/langDetect.js?v=2026-05-10"></script>
   <title>Ventisei — Creative agency</title>
   <meta name="description"
     content="Ventisei: branding, strategy, design, digital, and events. Building a clear voice and consistent market presence.">
@@ -33,7 +32,13 @@
   <link rel="manifest" href="../manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  </noscript>
   <link rel="stylesheet" href="../styles/tokens.css?v=2026-05-10">
   <link rel="stylesheet" href="../styles/base.css?v=2026-05-10">
   <link rel="stylesheet" href="../styles/sections.css?v=2026-05-26">
@@ -52,6 +57,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="nav-backdrop" hidden aria-hidden="true"></div>
   <aside class="index-rail">
     <a class="index-rail-brand" href="#hero" aria-label="Ventisei">
@@ -485,8 +491,8 @@
       <div class="blog-grid">
         <article class="blog-card">
           <div class="blog-ascii-wrap" aria-hidden="true">
-            <img class="blog-cover" src="../assets/blog/blog_zasto-ton.png" alt="Brand communication planning notes"
-              loading="lazy">
+            <img class="blog-cover" src="../assets/blog/blog_zasto-ton.jpg" alt="Brand communication planning notes"
+              width="1200" height="750" loading="lazy" decoding="async">
           </div>
           <div class="blog-card-body">
             <time class="blog-date" datetime="2026-03-12">March 12, 2026</time>
@@ -497,8 +503,8 @@
 
         <article class="blog-card">
           <div class="blog-ascii-wrap" aria-hidden="true">
-            <img class="blog-cover" src="../assets/blog/blog_landing-stranica.png"
-              alt="Landing page review on a laptop" loading="lazy">
+            <img class="blog-cover" src="../assets/blog/blog_landing-stranica.jpg"
+              alt="Landing page review on a laptop" width="1200" height="750" loading="lazy" decoding="async">
           </div>
           <div class="blog-card-body">
             <time class="blog-date" datetime="2026-03-28">March 28, 2026</time>
@@ -510,8 +516,8 @@
 
         <article class="blog-card">
           <div class="blog-ascii-wrap" aria-hidden="true">
-            <img class="blog-cover" src="../assets/blog/blog_dogadjaj-kao-modul.png"
-              alt="Live event production and organization" loading="lazy">
+            <img class="blog-cover" src="../assets/blog/blog_dogadjaj-kao-modul.jpg"
+              alt="Live event production and organization" width="1200" height="750" loading="lazy" decoding="async">
           </div>
           <div class="blog-card-body">
             <time class="blog-date" datetime="2026-04-02">April 2, 2026</time>
@@ -544,6 +550,7 @@
     </div>
   </footer>
 
+  <script defer src="../scripts/langDetect.js?v=2026-05-26"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>

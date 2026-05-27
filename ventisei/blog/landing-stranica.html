@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../scripts/langDetect.js?v=2026-05-10"></script>
-  <title>Landing stranica: prvih pet sekundi — Ventisei</title>
+    <title>Landing stranica: prvih pet sekundi — Ventisei</title>
   <meta name="description"
     content="Landing nema mnogo vremena — prva sekcija mora da vodi kroz jasnoću, razlog i poverenje.">
   <meta name="robots" content="index, follow">
@@ -32,7 +31,12 @@
   <link rel="apple-touch-icon" href="../assets/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  </noscript>
   <link rel="stylesheet" href="../styles/tokens.css?v=2026-05-10">
   <link rel="stylesheet" href="../styles/base.css?v=2026-05-10">
   <link rel="stylesheet" href="../styles/sections.css?v=2026-05-10">
@@ -93,7 +97,7 @@
         <h1>Landing stranica: šta korisnik mora da razume u prvih pet sekundi</h1>
       </header>
       <figure class="blog-article-hero">
-        <img class="blog-cover" src="../assets/blog/blog_landing-stranica.png" alt="Analiza landing stranice na laptopu"
+        <img class="blog-cover" src="../assets/blog/blog_landing-stranica.jpg" alt="Analiza landing stranice na laptopu"
           width="1200" height="750" loading="eager">
       </figure>
       <p>Landing stranica nema mnogo vremena da objašnjava. Korisnik brzo odlučuje da li je na pravom mestu, da li razume ponudu i da li ima razlog da nastavi dalje.</p>
@@ -135,6 +139,7 @@
     </div>
   </footer>
 
+  <script defer src="../scripts/langDetect.js?v=2026-05-26"></script>
   <script type="module" src="../scripts/blogPage.js?v=2026-05-10"></script>
 </body>
 

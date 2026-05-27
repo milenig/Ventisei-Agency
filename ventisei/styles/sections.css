@@ -817,6 +817,16 @@ body.is-mobile-nav-open {
 .section {
   position: relative;
 }
+
+#about,
+#works,
+#method,
+#services,
+#testimonials,
+#blog {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
 .section[id] {
   scroll-margin-top: calc(var(--nav-h) + 12px);
 }

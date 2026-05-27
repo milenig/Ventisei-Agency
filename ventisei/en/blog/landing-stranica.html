@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../../scripts/langDetect.js?v=2026-05-10"></script>
-  <title>Landing pages: the first five seconds — Ventisei</title>
+    <title>Landing pages: the first five seconds — Ventisei</title>
   <meta name="description" content="Landing pages have little time — the first section must lead with clarity, reason, and trust.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Ventisei">
@@ -32,7 +31,12 @@
   <link rel="apple-touch-icon" href="../../assets/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  </noscript>
   <link rel="stylesheet" href="../../styles/tokens.css?v=2026-05-10">
   <link rel="stylesheet" href="../../styles/base.css?v=2026-05-10">
   <link rel="stylesheet" href="../../styles/sections.css?v=2026-05-10">
@@ -91,7 +95,7 @@
         <h1>Landing pages: what users must understand in the first five seconds</h1>
       </header>
       <figure class="blog-article-hero">
-        <img class="blog-cover" src="../../assets/blog/blog_landing-stranica.png" alt="Landing page review on a laptop"
+        <img class="blog-cover" src="../../assets/blog/blog_landing-stranica.jpg" alt="Landing page review on a laptop"
           width="1200" height="750" loading="eager">
       </figure>
       <p>A landing page does not have much time to explain. Users quickly decide whether they are in the right place, whether they understand the offer, and whether they have a reason to continue.</p>
@@ -133,6 +137,7 @@
     </div>
   </footer>
 
+  <script defer src="../../scripts/langDetect.js?v=2026-05-26"></script>
   <script type="module" src="../../scripts/blogPage.js?v=2026-05-10"></script>
 </body>
 

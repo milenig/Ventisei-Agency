@@ -12,6 +12,28 @@ body {
   cursor: auto;
   -webkit-font-smoothing: antialiased;
 }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  z-index: 10001;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: var(--gutter);
+  top: 12px;
+  outline: 2px solid rgba(26, 107, 92, 0.55);
+  outline-offset: 3px;
+}
 /*a*/
 
 /* Avoid horizontal scroll when using rotated rail */

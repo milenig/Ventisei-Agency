@@ -32,6 +32,7 @@ function buildBrandList({ base, isEn, ariaHidden }) {
     img.height = 60;
     img.loading = 'lazy';
     img.decoding = 'async';
+    img.fetchPriority = 'low';
 
     li.appendChild(img);
     ul.appendChild(li);

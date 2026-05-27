@@ -5,13 +5,15 @@ export function initArchiveHoverShaders({ reducedMotion }) {
   const canvases = Array.from(document.querySelectorAll('.archive-shader'));
   if (!canvases.length) return;
 
-  // Lightweight 2D shader-like effect using Canvas2D (no extra WebGL contexts)
-  // until we can consolidate into a shared WebGL renderer.
   canvases.forEach((canvas, idx) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let w = 0, h = 0;
+    let w = 0;
+    let h = 0;
+    let visible = false;
+    let hovered = false;
+
     function resize() {
       const parent = canvas.parentElement;
       if (!parent) return;
@@ -23,13 +25,14 @@ export function initArchiveHoverShaders({ reducedMotion }) {
       h = H;
       canvas.width = w;
       canvas.height = h;
-      canvas.style.width = parent.clientWidth + 'px';
-      canvas.style.height = parent.clientHeight + 'px';
+      canvas.style.width = `${parent.clientWidth}px`;
+      canvas.style.height = `${parent.clientHeight}px`;
     }
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    let mx = 0.5, my = 0.5;
+    let mx = 0.5;
+    let my = 0.5;
     const tile = canvas.closest('.archive-tile') || canvas.parentElement;
     tile?.addEventListener(
       'mousemove',
@@ -40,14 +43,32 @@ export function initArchiveHoverShaders({ reducedMotion }) {
       },
       { passive: true }
     );
+    tile?.addEventListener('mouseenter', () => {
+      hovered = true;
+    });
+    tile?.addEventListener('mouseleave', () => {
+      hovered = false;
+      mx = 0.5;
+      my = 0.5;
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          visible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.08, rootMargin: '80px 0px' }
+    );
+    if (tile) io.observe(tile);
 
     const seed = (idx + 1) * 0.37;
     loop.subscribe(({ now }) => {
+      if (!visible || !hovered) return;
       resize();
       const t = now * 0.0006;
       ctx.clearRect(0, 0, w, h);
 
-      // Brutalist micro-grid + cyan pulse field
       const g = 18;
       ctx.globalCompositeOperation = 'source-over';
       ctx.strokeStyle = 'rgba(0,0,0,0.10)';
@@ -77,4 +98,3 @@ export function initArchiveHoverShaders({ reducedMotion }) {
     });
   });
 }
-

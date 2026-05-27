@@ -129,7 +129,8 @@ export function initHero({ reducedMotion }) {
       canvas.style.height = `${cssH}px`;
       W = nextW;
       H = nextH;
-      cell = Math.max(8, Math.floor(10 * dpr));
+      const cellBase = isMobileLayout() ? 14 : 10;
+      cell = Math.max(8, Math.floor(cellBase * dpr));
       cols = Math.ceil(W / cell);
       rows = Math.ceil(H / cell);
     }
@@ -191,7 +192,8 @@ export function initHero({ reducedMotion }) {
         const a = (0.03 + ((v + 1.6) / 3.2) * 0.08) * (0.15 + fade * 0.85);
 
         // Sparse sampling keeps it subtle + fast.
-        if ((x + y) % 2 === 1 && a < 0.07) continue;
+        const sampleStride = isMobileLayout() ? 3 : 2;
+        if ((x + y) % sampleStride !== 0 && a < 0.07) continue;
 
         const isAccent = (x * 13 + y * 7) % 37 === 0;
         ctx.fillStyle = isAccent ? `rgba(26,107,92,${a * 0.85})` : `rgba(10,10,10,${a})`;
