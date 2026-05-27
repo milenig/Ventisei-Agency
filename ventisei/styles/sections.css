@@ -18,6 +18,20 @@
   max-width: var(--container);
 }
 
+/* Desktop: offset content from fixed left rail; narrow column on smaller viewports */
+@media (min-width: 900px) {
+  .container,
+  .container--wide {
+    padding-left: var(--rail-safe-left);
+    padding-right: var(--gutter);
+  }
+
+  .feature-sticky-container {
+    padding-left: max(var(--rail-safe-left), clamp(92px, 10vh, 140px));
+    padding-right: var(--gutter);
+  }
+}
+
 .measure{ max-width: var(--measure); }
 .measure--narrow{ max-width: var(--measureNarrow); }
 
