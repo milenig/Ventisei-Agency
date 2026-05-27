@@ -22,8 +22,8 @@
   --ease-heavy: cubic-bezier(0.77, 0, 0.175, 1);
 
   --gutter: clamp(20px, 4vw, 72px);
-  /* Keep full-bleed section rules from crossing the fixed index rail */
-  --rail-safe-left: max(var(--gutter), calc(var(--gutter) + 168px));
+  /* Clearance for fixed index rail (padding only — not subtracted from content width) */
+  --rail-safe-left: max(var(--gutter), calc(var(--gutter) + 148px));
   --section-y: clamp(72px, 9vw, 140px);
   --section-y-lg: clamp(96px, 11vw, 180px);
   --grid-gap: 4px;
@@ -32,23 +32,12 @@
   --nav-h: 72px;
   --rail-x: 22px;
   --rail-y: 120px;
+  /* Content column; outer box adds rail + right gutter via --layout-max */
   --container: 1200px;
   --containerWide: 1240px;
+  --layout-max: calc(var(--container) + var(--rail-safe-left) + var(--gutter));
   --measure: 66ch;
   --measureNarrow: 54ch;
-}
-
-@media (min-width: 900px) and (max-width: 1199px) {
-  :root {
-    --rail-safe-left: max(var(--gutter), calc(var(--gutter) + 180px));
-    --container: min(860px, calc(100vw - var(--rail-safe-left) - var(--gutter) - 16px));
-  }
-}
-
-@media (min-width: 1200px) and (max-width: 1399px) {
-  :root {
-    --container: min(980px, calc(100vw - var(--rail-safe-left) - var(--gutter) - 20px));
-  }
 }
 
 @media (max-width: 1024px) {

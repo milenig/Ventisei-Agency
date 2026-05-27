@@ -22,6 +22,7 @@
 @media (min-width: 900px) {
   .container,
   .container--wide {
+    max-width: min(var(--layout-max), 100vw);
     padding-left: var(--rail-safe-left);
     padding-right: var(--gutter);
   }
@@ -1696,25 +1697,23 @@ body.is-mobile-nav-open {
 
   .feature-sticky-inner {
     width: 100%;
-    max-width: min(var(--container), calc(100vw - var(--rail-safe-left) - var(--gutter)));
+    max-width: var(--container);
     margin-inline: auto;
   }
 }
 
 @media (min-width: 900px) and (max-width: 1199px) {
   .feature-sticky-inner {
-    grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.32fr);
-    gap: clamp(18px, 2.5vw, 36px);
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(20px, 3vw, 48px);
   }
 
   .section-services .section-title {
-    font-size: clamp(24px, 2.6vw, 34px);
-    max-width: 14ch;
+    font-size: clamp(26px, 2.8vw, 38px);
   }
 
   .service-card {
-    flex: 0 0 clamp(260px, 32vw, 320px);
-    min-height: clamp(300px, 40vh, 380px);
+    flex: 0 0 clamp(280px, 32vw, 360px);
   }
 }
 
