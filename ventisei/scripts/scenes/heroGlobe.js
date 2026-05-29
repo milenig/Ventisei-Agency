@@ -115,6 +115,9 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
   let targetVelX = 0;
   let targetVelY = 0;
   let pointerInside = false;
+  let pointerEngaged = false;
+  let lastPointerX = null;
+  let lastPointerY = null;
   let unsub = null;
 
   const glowHost = glowEl ?? container?.querySelector('.hero-visual');
@@ -260,10 +263,27 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
       e.clientY <= rect.bottom;
     pointerInside = inside;
     if (!inside) {
+      pointerEngaged = false;
+      lastPointerX = null;
+      lastPointerY = null;
       targetVelX = 0;
       targetVelY = 0;
       return;
     }
+
+    if (lastPointerX !== null && lastPointerY !== null) {
+      const moved = Math.hypot(e.clientX - lastPointerX, e.clientY - lastPointerY);
+      if (moved > 2) pointerEngaged = true;
+    }
+    lastPointerX = e.clientX;
+    lastPointerY = e.clientY;
+
+    if (!pointerEngaged) {
+      targetVelX = 0;
+      targetVelY = 0;
+      return;
+    }
+
     const t = pointerTargetFromEvent(e);
     targetVelX = t.targetVelX;
     targetVelY = t.targetVelY;
@@ -271,6 +291,9 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
 
   const onPointerLeave = () => {
     pointerInside = false;
+    pointerEngaged = false;
+    lastPointerX = null;
+    lastPointerY = null;
     targetVelX = 0;
     targetVelY = 0;
     targetGlowOpacity = 0;
@@ -300,14 +323,15 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
 
     if (!isActive()) return;
 
-    if (!pointerControl || !pointerInside) {
-      targetVelY = IDLE_SPIN_Y;
+    if (!pointerControl || !pointerInside || !pointerEngaged) {
       targetVelX = 0;
+      targetVelY = 0;
     }
 
     velX += (targetVelX - velX) * smooth;
     velY += (targetVelY - velY) * smooth;
 
+    rotY += IDLE_SPIN_Y * dt;
     rotX += velX * dt;
     rotY += velY * dt;
     render();
