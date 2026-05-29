@@ -1,9 +1,6 @@
 export function initLenis({ enabled }) {
   if (!enabled) return null;
-  if (!window.Lenis) {
-    // If Lenis isn't available (blocked), we still run without it.
-    return null;
-  }
+  if (!window.Lenis) return null;
 
   const lenis = new window.Lenis({
     duration: 1.15,
@@ -12,42 +9,50 @@ export function initLenis({ enabled }) {
     smoothTouch: false,
   });
 
-  // ScrollTrigger integration (if present)
-  if (window.ScrollTrigger && window.gsap) {
-    // Drive ScrollTrigger from Lenis.
+  const hasGsap = Boolean(window.gsap && window.ScrollTrigger);
+
+  if (hasGsap) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
     lenis.on('scroll', window.ScrollTrigger.update);
 
-    // Lenis uses the native window scroller by default; scrollerProxy is still useful
-    // to ensure ScrollTrigger reads/writes via Lenis consistently.
+    window.gsap.ticker.lagSmoothing(0);
+    window.gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
     window.ScrollTrigger.scrollerProxy(document.documentElement, {
       scrollTop(value) {
         if (arguments.length) {
           lenis.scrollTo(value, { immediate: true });
         }
-        return window.scrollY || document.documentElement.scrollTop || 0;
+        return lenis.scroll;
       },
       getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
       },
-      fixedMarkers: true,
+      pinType: document.documentElement.style.transform ? 'transform' : 'fixed',
     });
 
     window.ScrollTrigger.addEventListener('refresh', () => lenis.resize());
     window.ScrollTrigger.defaults({ scroller: document.documentElement });
     window.ScrollTrigger.refresh();
-  }
-
-  function raf(time) {
-    lenis.raf(time);
+  } else {
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
   }
-  requestAnimationFrame(raf);
 
-  // Expose a minimal scroller abstraction
   lenis.scroller = {
     scrollTo: (target) => lenis.scrollTo(target, { immediate: false }),
   };
 
   return lenis;
 }
-

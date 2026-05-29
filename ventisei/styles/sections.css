@@ -189,6 +189,41 @@
   color: rgba(10, 10, 10, 0.86);
   transition: color var(--rail-theme-dur) var(--rail-theme-ease);
 }
+
+.brand-logo {
+  display: block;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-logo-wrap {
+  display: block;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+
+.brand-logo-wrap--rail {
+  line-height: 0;
+}
+
+.brand-logo--rail {
+  width: clamp(70px, 7.7vw, 133px);
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+  filter: none;
+  opacity: 1;
+  transition: opacity var(--rail-theme-dur) var(--rail-theme-ease);
+}
+
+.brand-logo--footer {
+  width: clamp(70px, 7.7vw, 133px);
+  height: auto;
+  max-width: none;
+  filter: brightness(0) invert(1);
+}
+
 .index-rail-brand-text {
   font-family: var(--font-body);
   font-size: 18px;
@@ -287,6 +322,10 @@
 .index-rail.is-on-dark .index-rail-brand,
 .index-rail.is-on-dark .index-rail-brand-text {
   color: rgba(255, 255, 255, 0.92);
+}
+.index-rail.is-on-dark .brand-logo--rail {
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
 }
 .index-rail.is-on-dark .nav-brand-mark {
   background:
@@ -412,6 +451,14 @@ body.is-mobile-nav-open {
   }
   .index-rail-brand-text {
     font-size: 16px;
+  }
+
+  .brand-logo--rail {
+    width: min(98px, 25vw);
+  }
+
+  .brand-logo--footer {
+    width: min(98px, 25vw);
   }
 
   .footer-logo {
@@ -773,7 +820,7 @@ body.is-mobile-nav-open {
   filter: brightness(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (pointer: coarse) {
   .hero-brands__track:not(.hero-brands__track--static) .hero-brands__list[aria-hidden='true'] {
     display: none;
   }
@@ -1134,7 +1181,7 @@ body.is-mobile-nav-open {
   opacity: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (pointer: coarse) {
   .archive-photo {
     transition: none;
   }
@@ -2401,6 +2448,14 @@ body.is-mobile-nav-open {
 
   .index-rail-brand-text {
     font-size: 16px;
+  }
+
+  .brand-logo--rail {
+    width: min(98px, 25vw);
+  }
+
+  .brand-logo--footer {
+    width: min(98px, 25vw);
   }
 
   .footer-logo {

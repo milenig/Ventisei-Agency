@@ -73,9 +73,13 @@ export function initHero({ reducedMotion }) {
           heroGlobeActive = entry.isIntersecting;
         });
       },
-      { threshold: 0.05 }
+      { threshold: 0, rootMargin: '120px' }
     );
     heroGlobeIo.observe(heroVisual);
+    requestAnimationFrame(() => {
+      const records = heroGlobeIo.takeRecords?.() ?? [];
+      if (records[0]) heroGlobeActive = records[0].isIntersecting;
+    });
 
     initHeroGlobe({
       container: heroVisual,

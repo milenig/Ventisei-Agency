@@ -57,7 +57,7 @@ body::after {
 
 .reveal-up { opacity: 0; transform: translateY(60px); }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (pointer: coarse) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .reveal-up,
   .reveal-scrub { opacity: 1; transform: none; }

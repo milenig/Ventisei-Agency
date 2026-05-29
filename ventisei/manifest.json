@@ -9,9 +9,15 @@
   "lang": "sr-Latn",
   "icons": [
     {
-      "src": "/assets/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/assets/logo-2.png",
+      "sizes": "116x116",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/logo-1.png",
+      "sizes": "380x62",
+      "type": "image/png",
       "purpose": "any"
     },
     {

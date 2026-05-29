@@ -8,46 +8,85 @@ import { initHeroBrandsMarquee } from './motion/heroBrandsMarquee.js';
 import { initReveals } from './motion/reveals.js';
 import { initContactForm } from './contactForm.js';
 import { initMobileNav } from './mobileNav.js';
+import { initArchiveHoverShaders } from './scenes/archiveHover.js';
+import { initMethodScroll } from './motion/methodScroll.js';
+import { initServicesHorizontal } from './motion/servicesHorizontal.js';
 
+/**
+ * Windows often reports prefers-reduced-motion when "Animation effects" is off.
+ * Keep full motion on fine-pointer desktop to match Mac; still respect on touch/mobile.
+ */
 function prefersReducedMotion() {
-  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  if (!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return false;
+  const desktopFine =
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    window.matchMedia('(min-width: 900px)').matches;
+  return !desktopFine;
 }
 
-function scheduleIdle(task, timeout = 2800) {
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(task, { timeout });
-    return;
-  }
-  window.setTimeout(task, 180);
+function refreshMotionLayout() {
+  window.ScrollTrigger?.refresh();
 }
 
-initGsap();
+function initScrollSections({ reducedMotion, lenis }) {
+  if (reducedMotion) return;
 
-const reducedMotion = prefersReducedMotion();
+  initArchiveHoverShaders({ reducedMotion });
+  initMethodScroll({ reducedMotion, lenis });
+  initServicesHorizontal({ reducedMotion, lenis });
 
-const lenis = initLenis({ enabled: !reducedMotion });
-
-initMobileNav();
-initSideMarkers({ scroller: lenis ?? window });
-initMarquee({ scroller: lenis?.scroller ?? window, reducedMotion });
-
-mountHeroBrands();
-initHero({ reducedMotion });
-initHeroBrandsMarquee({ reducedMotion });
-initReveals({ reducedMotion });
-initContactForm();
-
-if (!reducedMotion) {
-  scheduleIdle(async () => {
-    const [{ initArchiveHoverShaders }, { initMethodScroll }, { initServicesHorizontal }] =
-      await Promise.all([
-        import('./scenes/archiveHover.js'),
-        import('./motion/methodScroll.js'),
-        import('./motion/servicesHorizontal.js'),
-      ]);
-
-    initArchiveHoverShaders({ reducedMotion });
-    initMethodScroll({ reducedMotion, lenis });
-    initServicesHorizontal({ reducedMotion });
+  requestAnimationFrame(() => {
+    refreshMotionLayout();
+    requestAnimationFrame(refreshMotionLayout);
   });
 }
+
+function boot() {
+  initGsap();
+
+  const reducedMotion = prefersReducedMotion();
+  const lenis = initLenis({ enabled: !reducedMotion });
+
+  initMobileNav();
+  initSideMarkers({ scroller: lenis ?? window });
+  initMarquee({ scroller: lenis?.scroller ?? window, reducedMotion });
+
+  mountHeroBrands();
+  initHero({ reducedMotion });
+  initHeroBrandsMarquee({ reducedMotion });
+  initReveals({ reducedMotion });
+  initContactForm();
+
+  initScrollSections({ reducedMotion, lenis });
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(refreshMotionLayout).catch(() => {});
+  }
+
+  window.addEventListener('load', refreshMotionLayout, { once: true });
+  window.addEventListener(
+    'resize',
+    () => requestAnimationFrame(refreshMotionLayout),
+    { passive: true }
+  );
+}
+
+function waitForGsap(maxFrames = 120) {
+  if (window.gsap) {
+    boot();
+    return;
+  }
+  let frames = 0;
+  const tick = () => {
+    frames += 1;
+    if (window.gsap) boot();
+    else if (frames < maxFrames) requestAnimationFrame(tick);
+    else {
+      console.warn('[Ventisei] GSAP not loaded; running without scroll motion.');
+      boot();
+    }
+  };
+  requestAnimationFrame(tick);
+}
+
+waitForGsap();

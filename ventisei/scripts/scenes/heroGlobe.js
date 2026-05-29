@@ -310,8 +310,9 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
   }
 
   unsub = loop.subscribe(({ dt, now }) => {
-    const smooth = 1 - Math.exp(-VEL_SMOOTH * dt);
-    const glowSmooth = 1 - Math.exp(-10 * dt);
+    const step = dt > 0 ? dt : 1 / 60;
+    const smooth = 1 - Math.exp(-VEL_SMOOTH * step);
+    const glowSmooth = 1 - Math.exp(-10 * step);
 
     if (glowLayer && pointerControl) {
       glowX += (targetGlowX - glowX) * glowSmooth;
@@ -331,9 +332,9 @@ export function initHeroGlobe({ container, glowEl, reducedMotion, pointerControl
     velX += (targetVelX - velX) * smooth;
     velY += (targetVelY - velY) * smooth;
 
-    rotY += IDLE_SPIN_Y * dt;
-    rotX += velX * dt;
-    rotY += velY * dt;
+    rotY += IDLE_SPIN_Y * step;
+    rotX += velX * step;
+    rotY += velY * step;
     render();
   });
 

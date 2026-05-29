@@ -1,4 +1,6 @@
-export function initServicesHorizontal({ reducedMotion }) {
+import { getScrollY } from './scrollPosition.js';
+
+export function initServicesHorizontal({ reducedMotion, lenis = null }) {
   const section = document.getElementById('services');
   const viewport = section?.querySelector('[data-feature-viewport]');
   const track = section?.querySelector('[data-feature-track]');
@@ -72,7 +74,7 @@ export function initServicesHorizontal({ reducedMotion }) {
 
   function computeTargetX() {
     const rect = section.getBoundingClientRect();
-    const sectionTop = rect.top + window.scrollY;
+    const sectionTop = rect.top + getScrollY(lenis);
     const scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
 
     updateEdgePadding();
@@ -81,7 +83,7 @@ export function initServicesHorizontal({ reducedMotion }) {
       lastShiftPx = shift;
       applyDynamicScrollHeight({ shiftPx: shift });
     }
-    const raw = (window.scrollY - sectionTop) / scrollRange;
+    const raw = (getScrollY(lenis) - sectionTop) / scrollRange;
     const progress = clamp01(raw);
 
     targetX = -progress * shift;
@@ -181,5 +183,11 @@ export function initServicesHorizontal({ reducedMotion }) {
     mqlDesktop.addEventListener('change', onModeChange);
   } else if (mqlDesktop?.addListener) {
     mqlDesktop.addListener(onModeChange);
+  }
+
+  if (lenis?.on) {
+    lenis.on('scroll', () => {
+      if (isActive && mqlDesktop?.matches) computeTargetX();
+    });
   }
 }
